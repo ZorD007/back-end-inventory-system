@@ -2,6 +2,7 @@ package com.project.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "producto")
@@ -29,4 +30,10 @@ public class Producto {
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Marca marca;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<VentasProducto> productoL;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    private List<ProductoSucursal> productoSucursal;
 }
