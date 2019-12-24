@@ -18,4 +18,18 @@ public class MappingObjetoMarca {
         }
         return marcaLocal;
     }
+
+    public Marca transformModelaResponse(ReqDtoMarca reqDtoMarca) throws Exception{
+        Marca marcaLocal;
+        try{
+            marcaLocal = new Marca();
+
+
+
+        }catch(Exception ex){
+            ex.printStackTrace();
+            throw new Exception();
+        }
+        return marcaLocal;
+    }
 }
