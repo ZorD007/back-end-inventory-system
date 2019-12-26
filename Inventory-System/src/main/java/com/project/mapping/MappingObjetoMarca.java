@@ -4,9 +4,11 @@ import com.project.dto.ReqDtoMarca;
 import com.project.dto.ResponseDtoMarca;
 import com.project.model.Marca;
 import com.project.util.Constant;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class MappingObjetoMarca {
     public Marca transformDtoToModel(ReqDtoMarca reqDtoMarca) throws Exception {
         Marca marcaLocal;
