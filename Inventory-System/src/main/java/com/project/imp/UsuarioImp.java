@@ -2,6 +2,7 @@ package com.project.imp;
 
 import com.project.dto.ReqDtoUsuario;
 import com.project.dto.ResponseDtoUsuario;
+import com.project.exception.NoGuardadoException;
 import com.project.exception.NoValidarSesionException;
 import com.project.mapping.MappingObjetoUsuarios;
 import com.project.model.Rol;
@@ -44,11 +45,11 @@ public class UsuarioImp implements IUsuariosService {
 
                 responseDtoUsuario = mappingObjetoUsuarios.transformarUsuarioAResponse(usuariosRepository.save(usuario));
             } else {
-                throw new NoValidarSesionException(Constant.ERROR_SESION);
+                throw new NoGuardadoException(Constant.ERROR_GUARDAR);
             }
-        }catch (NoValidarSesionException ex){
+        }catch (NoGuardadoException ex){
             ex.printStackTrace();
-            throw new NoValidarSesionException(ex.getMessage());
+            throw new NoGuardadoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
             throw new Exception();
