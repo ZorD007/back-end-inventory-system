@@ -1,9 +1,14 @@
 package com.project.dto;
 
-public class ReqDtoUsuarios {
+import java.util.Date;
+
+public class ReqDtoUsuario {
     private Long idUsuarioDto;
+    private String nombreDto;
     private String userNameDto;
     private String passwordDto;
+    private Date fechaDto;
+
 
     public Long getIdUsuarioDto() {
         return idUsuarioDto;
@@ -11,6 +16,14 @@ public class ReqDtoUsuarios {
 
     public void setIdUsuarioDto(Long idUsuarioDto) {
         this.idUsuarioDto = idUsuarioDto;
+    }
+
+    public String getNombreDto() {
+        return nombreDto;
+    }
+
+    public void setNombreDto(String nombreDto) {
+        this.nombreDto = nombreDto;
     }
 
     public String getUserNameDto() {
@@ -27,5 +40,13 @@ public class ReqDtoUsuarios {
 
     public void setPasswordDto(String passwordDto) {
         this.passwordDto = passwordDto;
+    }
+
+    public Date getFechaDto() {
+        return fechaDto;
+    }
+
+    public void setFechaDto(Date fechaDto) {
+        this.fechaDto = fechaDto;
     }
 }
