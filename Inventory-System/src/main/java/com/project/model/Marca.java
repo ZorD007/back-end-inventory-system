@@ -11,7 +11,7 @@ public class Marca {
     @Column(name = "id_marca")
     private Long idMarca;
 
-    @Column(name = "nombre_marca", nullable = false)
+    @Column(name = "nombre_marca", nullable = false, unique = true)
     private String nombreMarca;
 
     public Long getIdMarca() {

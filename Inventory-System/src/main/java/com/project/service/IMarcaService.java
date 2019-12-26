@@ -1,9 +1,10 @@
 package com.project.service;
 
 import com.project.dto.ReqDtoMarca;
+import com.project.dto.ResponseDtoMarca;
 import com.project.model.Marca;
 
 public interface IMarcaService {
-    Marca agregarMarca(ReqDtoMarca reqDtoMarca) throws Exception;
-    Marca eliminarMarca() throws Exception;
+    ResponseDtoMarca agregarMarca(ReqDtoMarca reqDtoMarca) throws Exception;
+    boolean eliminarMarca(Long id) throws Exception;
 }
