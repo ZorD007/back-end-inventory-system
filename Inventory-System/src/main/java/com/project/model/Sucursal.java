@@ -17,4 +17,30 @@ public class Sucursal {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sucursal")
     private List<ProductoSucursal> sucursalProducto;
+
+    public Long getIdSucursal() {
+        return idSucursal;
+    }
+
+    public void setIdSucursal(Long idSucursal) {
+        this.idSucursal = idSucursal;
+    }
+
+    public String getNombreSucursal() {
+        return nombreSucursal;
+    }
+
+    public void setNombreSucursal(String nombreSucursal) {
+        this.nombreSucursal = nombreSucursal;
+    }
+
+    public List<ProductoSucursal> getSucursalProducto() {
+        return sucursalProducto;
+    }
+
+    public void setSucursalProducto(List<ProductoSucursal> sucursalProducto) {
+        this.sucursalProducto = sucursalProducto;
+    }
 }
+
+

@@ -1,9 +1,9 @@
 package com.project.controller;
 
-import com.project.dto.ReqDtoMarca;
+import com.project.dto.ReqDtoRol;
 import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
-import com.project.imp.MarcaImp;
+import com.project.imp.RolImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,38 +11,40 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/v1/marcas")
-public class MarcaController {
+@RequestMapping("/api/v1/roles")
+public class RolController {
 
     @Autowired
-    private MarcaImp marcaImp;
+    private RolImp rolImp;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> agregarMarca(@RequestBody ReqDtoMarca reqDtoMarca){
+    public ResponseEntity<Object> agregarRol(@RequestBody ReqDtoRol reqDtoRol) {
         ResponseEntity<Object> rs = null;
-        try{
-            rs = new ResponseEntity<Object>(marcaImp.agregarMarca(reqDtoMarca), HttpStatus.OK);
-        }catch(NoGuardadoException ex){
+        try {
+            rs = new ResponseEntity<Object>(rolImp.añadirRol(reqDtoRol), HttpStatus.OK);
+        } catch (NoGuardadoException ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> eliminarMarca(@PathVariable  Long id){
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> buscarPorId(@PathVariable Long id){
         ResponseEntity<Object> rs = null;
-        try{
-            rs = new ResponseEntity<Object>(marcaImp.eliminarMarca(id), HttpStatus.OK);
-        }catch(NoEncontradoException ex){
+        try {
+            rs = new ResponseEntity<Object>(rolImp.buscarPorId(id), HttpStatus.OK);
+        } catch (NoEncontradoException ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
+
 }
