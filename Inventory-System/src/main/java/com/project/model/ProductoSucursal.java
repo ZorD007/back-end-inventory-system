@@ -11,11 +11,11 @@ public class ProductoSucursal {
     @Column(name = "id_productosucursal")
     private Long idProductoSucursal;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_sucursal", nullable = false, updatable = false)
     private Sucursal sucursal;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", nullable = false, updatable = false)
     private Producto producto;
 }

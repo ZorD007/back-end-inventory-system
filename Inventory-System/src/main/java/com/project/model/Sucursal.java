@@ -12,7 +12,7 @@ public class Sucursal {
     @Column(name = "id_sucursal")
     private Long idSucursal;
 
-    @Column(name = "nombre_sucursal", nullable = false)
+    @Column(name = "nombre_sucursal", nullable = false, unique = true)
     private String nombreSucursal;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "sucursal")

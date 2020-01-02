@@ -19,7 +19,7 @@ public class MappingObjetoMarca {
 
         }catch(Exception ex){
             ex.printStackTrace();
-            throw new Exception();
+            throw new Exception(Constant.ERROR_SISTEMA);
 
         }
         return marcaLocal;
@@ -33,7 +33,7 @@ public class MappingObjetoMarca {
 
         }catch(Exception ex){
             ex.printStackTrace();
-            throw new Exception();
+            throw new Exception(Constant.ERROR_SISTEMA);
         }
         return responseDtoMarca;
     }
