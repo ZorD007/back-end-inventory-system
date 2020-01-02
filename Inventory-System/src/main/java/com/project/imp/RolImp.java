@@ -10,7 +10,9 @@ import com.project.repository.RolRepository;
 import com.project.service.IRolService;
 import com.project.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RolImp implements IRolService {
 
     @Autowired
