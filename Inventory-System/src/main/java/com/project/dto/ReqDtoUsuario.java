@@ -8,7 +8,7 @@ public class ReqDtoUsuario {
     private String userNameDto;
     private String passwordDto;
     private Date fechaDto;
-
+    private String cargoDto;
 
     public Long getIdUsuarioDto() {
         return idUsuarioDto;
@@ -48,5 +48,13 @@ public class ReqDtoUsuario {
 
     public void setFechaDto(Date fechaDto) {
         this.fechaDto = fechaDto;
+    }
+
+    public String getCargoDto() {
+        return cargoDto;
+    }
+
+    public void setCargoDto(String cargoDto) {
+        this.cargoDto = cargoDto;
     }
 }

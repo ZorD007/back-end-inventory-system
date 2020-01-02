@@ -1,9 +1,9 @@
 package com.project.controller;
 
-import com.project.dto.ReqDtoUsuario;
+import com.project.dto.ReqDtoRol;
+import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
-import com.project.exception.NoValidarSesionException;
-import com.project.imp.UsuarioImp;
+import com.project.imp.RolImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,39 +11,40 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/api/v1/usuarios")
-public class UsuariosController {
+@RequestMapping("/api/v1/roles")
+public class RolController {
 
     @Autowired
-    private UsuarioImp usuarioImp;
+    private RolImp rolImp;
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Object> registrarUsuario(@RequestBody ReqDtoUsuario reqDtoUsuario){
+    public ResponseEntity<Object> agregarRol(@RequestBody ReqDtoRol reqDtoRol) {
         ResponseEntity<Object> rs = null;
         try {
-            rs = new ResponseEntity<Object>(usuarioImp.registrarUsuario(reqDtoUsuario), HttpStatus.OK);
-        }catch (NoGuardadoException ex){
+            rs = new ResponseEntity<Object>(rolImp.añadirRol(reqDtoRol), HttpStatus.OK);
+        } catch (NoGuardadoException ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
 
-    @RequestMapping(value = "/sessions", method = RequestMethod.POST)
-    public ResponseEntity<Object> validarSesion(@RequestBody ReqDtoUsuario reqDtoUsuario){
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> buscarPorId(@PathVariable Long id){
         ResponseEntity<Object> rs = null;
         try {
-            rs = new ResponseEntity<Object>(usuarioImp.validarSesion(reqDtoUsuario), HttpStatus.OK);
-        }catch (NoValidarSesionException ex){
+            rs = new ResponseEntity<Object>(rolImp.buscarPorId(id), HttpStatus.OK);
+        } catch (NoEncontradoException ex) {
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
-        }catch (Exception ex){
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
+
 }

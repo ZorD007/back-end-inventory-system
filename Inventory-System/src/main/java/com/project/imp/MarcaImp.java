@@ -26,7 +26,7 @@ public class MarcaImp implements IMarcaService {
         ResponseDtoMarca responseDtoMarca;
         Marca marcaLocal;
         try{
-            Marca validarMarca = marcaRepository.findByName(reqDtoMarca.getNombreMarcaDto());
+            Marca validarMarca = marcaRepository.findByNombreMarca(reqDtoMarca.getNombreMarcaDto());
             if(validarMarca == null){
                 marcaLocal = new Marca();
                 marcaLocal.setNombreMarca(reqDtoMarca.getNombreMarcaDto());
