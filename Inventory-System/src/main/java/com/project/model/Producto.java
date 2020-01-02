@@ -36,4 +36,76 @@ public class Producto {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
     private List<ProductoSucursal> productoSucursal;
+
+    public Long getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(Long idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public String getSistemaOperativo() {
+        return sistemaOperativo;
+    }
+
+    public void setSistemaOperativo(String sistemaOperativo) {
+        this.sistemaOperativo = sistemaOperativo;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
+    }
+
+    public Date getFechaProducto() {
+        return fechaProducto;
+    }
+
+    public void setFechaProducto(Date fechaProducto) {
+        this.fechaProducto = fechaProducto;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public List<VentasProducto> getProductoL() {
+        return productoL;
+    }
+
+    public void setProductoL(List<VentasProducto> productoL) {
+        this.productoL = productoL;
+    }
+
+    public List<ProductoSucursal> getProductoSucursal() {
+        return productoSucursal;
+    }
+
+    public void setProductoSucursal(List<ProductoSucursal> productoSucursal) {
+        this.productoSucursal = productoSucursal;
+    }
 }
