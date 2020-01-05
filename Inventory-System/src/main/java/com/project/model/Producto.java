@@ -28,7 +28,7 @@ public class Producto {
     @Column(name = "cantidad", nullable = false)
     private int cantidad;
 
-    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Marca marca;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")

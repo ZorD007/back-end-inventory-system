@@ -67,6 +67,7 @@ public class ReqDtoProducto {
     }
 
     public void setMarcaDto(Marca marcaDto) {
+
         this.marcaDto = marcaDto;
     }
 }

@@ -5,6 +5,8 @@ import com.project.model.Producto;
 import com.project.util.Constant;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MappingObjetoProducto {
 
@@ -20,5 +22,20 @@ public class MappingObjetoProducto {
            throw new Exception(Constant.ERROR_SISTEMA);
        }
        return responseDtoProducto;
+    }
+
+    public Producto transformarOptionaProducto(Optional<Producto> productoOptional) throws Exception {
+       Producto producto = null;
+        try {
+            if(productoOptional.isPresent()){
+                producto = new Producto();
+                producto.setPrecio(productoOptional.get().getPrecio());
+                producto.setCantidad(productoOptional.get().getCantidad());
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+        return producto;
     }
 }
