@@ -13,6 +13,9 @@ import com.project.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ProductoImp implements IProductoService {
 
@@ -88,6 +91,39 @@ public class ProductoImp implements IProductoService {
             throw new Exception(Constant.ERROR_SISTEMA);
         }
         return productoLocal;
+    }
+
+    @Override
+    public boolean eliminarProducto(Long id) throws Exception {
+        try{
+
+           Producto producto = transformarObjetos.transformarOptionaProducto(productoRepository.findById(id));
+            if(null == producto){
+                throw new NoEncontradoException(Constant.ERROR_NO_ENCONTRADO);
+            }else{
+                productoRepository.deleteById(id);
+                return true;
+            }
+        }catch (NoEncontradoException ex){
+            ex.printStackTrace();
+            throw new NoEncontradoException(ex.getMessage());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+    }
+
+    @Override
+    public List<Producto> listarProducto() throws Exception {
+
+        List<Producto> listProducto = new ArrayList<>();
+        try {
+            listProducto = productoRepository.findAll();
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+        return listProducto;
     }
 
 }

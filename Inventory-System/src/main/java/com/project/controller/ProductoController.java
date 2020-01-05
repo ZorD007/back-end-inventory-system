@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.dto.ReqDtoProducto;
+import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
 import com.project.exception.NoValidarSesionException;
 import com.project.imp.ProductoImp;
@@ -37,6 +38,36 @@ public class ProductoController {
         ResponseEntity<Object> rs = null;
         try {
             rs = new ResponseEntity<Object>(productoImp.modificarProducto(id,reqDtoProducto),HttpStatus.OK);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR) ;
+        }
+        return  rs;
+    }
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity<Object> eliminarProducto(@PathVariable Long id){
+        ResponseEntity<Object> rs = null;
+        try {
+            rs = new ResponseEntity<Object>(productoImp.eliminarProducto(id),HttpStatus.OK);
+        }catch (NoEncontradoException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND) ;
+        }catch (Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR) ;
+        }
+        return  rs;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<Object> listarProducto(){
+        ResponseEntity<Object> rs = null;
+        try {
+            rs = new ResponseEntity<Object>(productoImp.listarProducto(),HttpStatus.OK);
+        }catch (NoEncontradoException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND) ;
         }catch (Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR) ;
