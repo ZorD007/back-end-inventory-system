@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.dto.ReqDtoUsuario;
+import com.project.dto.ReqDtoUsuarioLogin;
 import com.project.exception.NoGuardadoException;
 import com.project.exception.NoValidarSesionException;
 import com.project.imp.UsuarioImp;
@@ -33,7 +34,7 @@ public class UsuariosController {
     }
 
     @RequestMapping(value = "/sessions", method = RequestMethod.POST)
-    public ResponseEntity<Object> validarSesion(@RequestBody ReqDtoUsuario reqDtoUsuario){
+    public ResponseEntity<Object> validarSesion(@RequestBody ReqDtoUsuarioLogin reqDtoUsuario){
         ResponseEntity<Object> rs = null;
         try {
             rs = new ResponseEntity<Object>(usuarioImp.validarSesion(reqDtoUsuario), HttpStatus.OK);

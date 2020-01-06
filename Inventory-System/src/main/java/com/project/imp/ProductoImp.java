@@ -63,7 +63,7 @@ public class ProductoImp implements IProductoService {
                 producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
                 producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
 
-                responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.save(producto));
+                responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.saveAndFlush(producto));
             }else{
                 throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
             }
