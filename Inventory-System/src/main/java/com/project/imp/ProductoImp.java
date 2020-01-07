@@ -58,6 +58,7 @@ public class ProductoImp implements IProductoService {
 
                 producto.setCantidad(reqDtoProducto.getCantidadDto());
                 producto.setPrecio(reqDtoProducto.getPrecioDto());
+<<<<<<< HEAD
                 //producto.setIdProducto(reqDtoProducto.getIdProductoDto());
                 //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
                 //producto.setMarca(reqDtoProducto.getMarcaDto());
@@ -67,6 +68,12 @@ public class ProductoImp implements IProductoService {
 
                 Producto productoActualizado = productoRepository.save(producto);
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoActualizado);
+=======
+                producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
+                producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
+
+                responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.saveAndFlush(producto));
+>>>>>>> 05497773941ad5c3e5a8fa66cc7a5131333dede1
             }else{
                 throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
             }

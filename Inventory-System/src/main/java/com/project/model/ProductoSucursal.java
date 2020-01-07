@@ -18,4 +18,28 @@ public class ProductoSucursal {
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", nullable = false, updatable = false)
     private Producto producto;
+
+    public Long getIdProductoSucursal() {
+        return idProductoSucursal;
+    }
+
+    public void setIdProductoSucursal(Long idProductoSucursal) {
+        this.idProductoSucursal = idProductoSucursal;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public void setProducto(Producto producto) {
+        this.producto = producto;
+    }
 }
