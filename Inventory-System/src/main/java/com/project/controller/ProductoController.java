@@ -3,7 +3,6 @@ package com.project.controller;
 import com.project.dto.ReqDtoProducto;
 import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
-import com.project.exception.NoValidarSesionException;
 import com.project.imp.ProductoImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

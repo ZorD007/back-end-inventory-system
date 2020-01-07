@@ -53,17 +53,20 @@ public class ProductoImp implements IProductoService {
         ResponseDtoProducto responseDtoProducto= null;
         try{
 
-            Producto producto = buscarPorId(id);
+            Producto producto = productoRepository.findById(id).get();
             if(null != reqDtoProducto){
-                producto.setCantidad(reqDtoProducto.getCantidadDto());
-                producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-                producto.setMarca(reqDtoProducto.getMarcaDto());
-                producto.setModelo(reqDtoProducto.getModeloDto());
-                producto.setPrecio(reqDtoProducto.getPrecioDto());
-                producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
-                producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
 
-                responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.save(producto));
+                producto.setCantidad(reqDtoProducto.getCantidadDto());
+                producto.setPrecio(reqDtoProducto.getPrecioDto());
+                //producto.setIdProducto(reqDtoProducto.getIdProductoDto());
+                //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
+                //producto.setMarca(reqDtoProducto.getMarcaDto());
+                //producto.setModelo(reqDtoProducto.getModeloDto());
+                //producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
+                //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
+
+                Producto productoActualizado = productoRepository.save(producto);
+                responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoActualizado);
             }else{
                 throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
             }
@@ -114,11 +117,15 @@ public class ProductoImp implements IProductoService {
     }
 
     @Override
-    public List<Producto> listarProducto() throws Exception {
+    public List<ResponseDtoProducto> listarProducto() throws Exception {
 
-        List<Producto> listProducto = new ArrayList<>();
+        List<ResponseDtoProducto> listProducto = new ArrayList<>();
         try {
-            listProducto = productoRepository.findAll();
+            List<Producto> productos = productoRepository.findAll();
+            for(Producto p : productos){
+                listProducto.add(  transformarObjetos.transformarProductoResponseDto( p ));
+            }
+
         }catch (Exception ex){
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);
