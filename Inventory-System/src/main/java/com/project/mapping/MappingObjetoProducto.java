@@ -18,7 +18,6 @@ public class MappingObjetoProducto {
                responseDtoProducto.setIdProductoDto(producto.getIdProducto());
                responseDtoProducto.setCantidadDto(producto.getCantidad());
                responseDtoProducto.setFechaProductoDto(producto.getFechaProducto());
-               responseDtoProducto.setMarcaDto(producto.getMarca());
                responseDtoProducto.setSistemaOperativoDto(producto.getSistemaOperativo());
                responseDtoProducto.setModeloDto(producto.getModelo());
                responseDtoProducto.setPrecioDto(producto.getPrecio());

@@ -12,7 +12,7 @@ public class ResponseDtoProducto {
     private int precioDto;
     private Date fechaProductoDto;
     private int cantidadDto;
-    private Marca marcaDto;
+
 
     public Long getIdProductoDto() {
         return idProductoDto;
@@ -62,11 +62,4 @@ public class ResponseDtoProducto {
         this.cantidadDto = cantidadDto;
     }
 
-    public Marca getMarcaDto() {
-        return marcaDto;
-    }
-
-    public void setMarcaDto(Marca marcaDto) {
-        this.marcaDto = marcaDto;
-    }
 }
