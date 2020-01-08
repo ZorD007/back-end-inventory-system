@@ -58,22 +58,18 @@ public class ProductoImp implements IProductoService {
 
                 producto.setCantidad(reqDtoProducto.getCantidadDto());
                 producto.setPrecio(reqDtoProducto.getPrecioDto());
-<<<<<<< HEAD
                 //producto.setIdProducto(reqDtoProducto.getIdProductoDto());
                 //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
                 //producto.setMarca(reqDtoProducto.getMarcaDto());
                 //producto.setModelo(reqDtoProducto.getModeloDto());
                 //producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
                 //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-
                 Producto productoActualizado = productoRepository.save(producto);
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoActualizado);
-=======
                 producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
                 producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
 
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.saveAndFlush(producto));
->>>>>>> 05497773941ad5c3e5a8fa66cc7a5131333dede1
             }else{
                 throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
             }
@@ -130,7 +126,7 @@ public class ProductoImp implements IProductoService {
         try {
             List<Producto> productos = productoRepository.findAll();
             for(Producto p : productos){
-                listProducto.add(  transformarObjetos.transformarProductoResponseDto( p ));
+                listProducto.add(transformarObjetos.transformarProductoResponseDto(p));
             }
 
         }catch (Exception ex){
