@@ -106,7 +106,6 @@ public class ProductoImp implements IProductoService {
     @Override
     public boolean eliminarProducto(Long id) throws Exception {
         try{
-
            Producto producto = transformarObjetos.transformarOptionaProducto(productoRepository.findById(id));
             if(null == producto){
                 throw new NoEncontradoException(Constant.ERROR_NO_ENCONTRADO);

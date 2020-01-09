@@ -57,7 +57,6 @@ public class MarcaImp implements IMarcaService {
         }catch(NoEncontradoException ex) {
             ex.printStackTrace();
             throw new NoEncontradoException(ex.getMessage());
-
         }catch(Exception ex) {
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);

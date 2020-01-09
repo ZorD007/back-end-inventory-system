@@ -2,8 +2,8 @@ package com.project.imp;
 
 import com.project.dto.ReqDtoVentas;
 import com.project.dto.ResponseDtoVentas;
+import com.project.exception.NoMostrarException;
 import com.project.mapping.MappingObjetoVentas;
-import com.project.model.Producto;
 import com.project.model.Ventas;
 import com.project.repository.VentasRepository;
 import com.project.service.IVentasService;
@@ -49,6 +49,19 @@ public class VentasImp implements IVentasService {
 
     @Override
     public ResponseDtoVentas mostrarVenta(ReqDtoVentas reqDtoVentas) throws Exception {
-        return null;
+       /* ResponseDtoVentas ventasDtoLocal;
+        Ventas ventaLocal;
+        try {
+
+        }catch (NoMostrarException ex){
+            ex.printStackTrace();
+            throw new NoMostrarException(ex.getMessage());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(ex.getMessage());
+        }
+
+        */
+       return null;
     }
 }
