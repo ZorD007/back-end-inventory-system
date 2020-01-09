@@ -59,7 +59,7 @@ public class ProductoController {
         return  rs;
     }
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public ResponseEntity<Object> listarProducto(){
         ResponseEntity<Object> rs = null;
         try {

@@ -42,6 +42,7 @@ public class UsuarioImp implements IUsuariosService {
                 usuario = new Usuario();
                 usuario.setNombreUsuario(reqDtoUsuario.getNombreDto());
                 usuario.setUserName(reqDtoUsuario.getUserNameDto());
+                usuario.setRol(validarRol);
                 usuario.setPasswordUsuario(iPbkdf2EncryptService.generarHashPassword(reqDtoUsuario.getPasswordDto()));
 
                 responseDtoUsuario = mappingObjetoUsuarios.transforUserToResponse(usuariosRepository.save(usuario));
