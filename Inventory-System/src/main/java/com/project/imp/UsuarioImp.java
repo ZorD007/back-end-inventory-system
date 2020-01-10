@@ -1,6 +1,7 @@
 package com.project.imp;
 
 import com.project.dto.ReqDtoUsuario;
+import com.project.dto.ReqDtoUsuarioLogin;
 import com.project.dto.ResponseDtoUsuario;
 import com.project.exception.NoGuardadoException;
 import com.project.exception.NoValidarSesionException;
@@ -41,9 +42,10 @@ public class UsuarioImp implements IUsuariosService {
                 usuario = new Usuario();
                 usuario.setNombreUsuario(reqDtoUsuario.getNombreDto());
                 usuario.setUserName(reqDtoUsuario.getUserNameDto());
+                usuario.setRol(validarRol);
                 usuario.setPasswordUsuario(iPbkdf2EncryptService.generarHashPassword(reqDtoUsuario.getPasswordDto()));
 
-                responseDtoUsuario = mappingObjetoUsuarios.transformarUsuarioAResponse(usuariosRepository.save(usuario));
+                responseDtoUsuario = mappingObjetoUsuarios.transforUserToResponse(usuariosRepository.save(usuario));
             } else {
                 throw new NoGuardadoException(Constant.ERROR_GUARDAR);
             }
@@ -58,11 +60,12 @@ public class UsuarioImp implements IUsuariosService {
     }
 
     @Override
-    public boolean validarSesion(ReqDtoUsuario reqDtoUsuario) throws Exception {
+    public boolean validarSesion(ReqDtoUsuarioLogin reqDtoUsuario) throws Exception {
         Usuario usuarioLocal;
         try {
             usuarioLocal = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
-            if (usuarioLocal != null){
+            Rol validarCargo = rolRepository.findByCargo(usuarioLocal.getRol().getCargo());
+            if (usuarioLocal != null && validarCargo != null){
                 return iPbkdf2EncryptService.validarPassword(reqDtoUsuario.getPasswordDto(), usuarioLocal.getPasswordUsuario());
             }else {
                 throw new NoValidarSesionException(Constant.ERROR_VALIDAR);
