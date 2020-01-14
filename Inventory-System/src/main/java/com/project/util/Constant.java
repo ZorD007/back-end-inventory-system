@@ -9,9 +9,9 @@ public class Constant {
     public static String ERROR_ACTUALIZAR = "ERROR AL ACTUALIZAR";
     public static String ERROR_ELIMINAR = "ERROR AL ELIMINAR";
     public static String ERROR_AGREGAR = "ERROR AL AGREGAR";
-    public static String AGREGAR = "SE HA AGREGADO CON EXITO";
-    public static String ACTUALIZAR = "SE HA ACTUALIZADO CON EXITO";
-    public static String ELIMINAR = "SE HA ELIMINADO CON EXITO";
+    public static String DONE_AGREGAR = "SE HA AGREGADO CON EXITO";
+    public static String DONE_ACTUALIZAR = "SE HA ACTUALIZADO CON EXITO";
+    public static String DONE_ELIMINAR = "SE HA ELIMINADO CON EXITO";
     public static String STOCK_BAJO = "STOCK BAJO";
     public static String STOCK_NULO = "NO QUEDA STOCK";
     public static byte ZERO = 0;
