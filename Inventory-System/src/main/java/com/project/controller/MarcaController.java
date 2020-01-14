@@ -31,7 +31,7 @@ public class MarcaController {
         }
         return rs;
     }
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> eliminarMarca(@PathVariable  Long id){
         ResponseEntity<Object> rs = null;
         try{
