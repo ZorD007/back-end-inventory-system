@@ -3,6 +3,8 @@ package com.project.imp;
 import com.project.dto.ReqDtoUsuario;
 import com.project.dto.ReqDtoUsuarioLogin;
 import com.project.dto.ResponseDtoUsuario;
+import com.project.exception.NoActualizarException;
+import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
 import com.project.exception.NoValidarSesionException;
 import com.project.mapping.MappingObjetoUsuarios;
@@ -13,8 +15,13 @@ import com.project.repository.UsuarioRepository;
 import com.project.service.IPbkdf2EncryptService;
 import com.project.service.IUsuariosService;
 import com.project.util.Constant;
+import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.xml.ws.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UsuarioImp implements IUsuariosService {
@@ -77,5 +84,78 @@ public class UsuarioImp implements IUsuariosService {
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);
         }
+    }
+
+    @Override
+    public Usuario buscarPorId(Long id) throws Exception {
+        Usuario usuarioLocal;
+        try{
+            usuarioLocal = mappingObjetoUsuarios.transformarOptionalaUsuario(usuariosRepository.findById(id));
+            if(usuarioLocal == null){
+                throw new NoEncontradoException(Constant.ERROR_NO_ENCONTRADO);
+            }
+        }catch(NoEncontradoException ex) {
+            ex.printStackTrace();
+            throw new NoEncontradoException(ex.getMessage());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+        return usuarioLocal;
+    }
+
+    @Override
+    public ResponseDtoUsuario modificarUsuario(Long id, ReqDtoUsuario reqDtoUsuario) throws Exception {
+        ResponseDtoUsuario responseDtoUsuario = null;
+        try{
+            Usuario usuario = usuariosRepository.findById(id).get();
+            if (reqDtoUsuario != null){
+                usuario.setUserName(reqDtoUsuario.getUserNameDto());
+                usuario.setPasswordUsuario(reqDtoUsuario.getPasswordDto());
+                Usuario usuarioActualizado = usuariosRepository.save(usuario);
+                responseDtoUsuario = mappingObjetoUsuarios.transforUserToResponse(usuarioActualizado);
+                responseDtoUsuario = mappingObjetoUsuarios.transforUserToResponse(usuariosRepository.saveAndFlush(usuario));
+            }else{
+                throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return responseDtoUsuario;
+    }
+
+    @Override
+    public boolean eliminarUsuario(Long id) throws Exception {
+        try{
+            Usuario usuario = mappingObjetoUsuarios.transformarOptionalaUsuario(usuariosRepository.findById(id));
+            if(usuario == null){
+                throw new NoEncontradoException(Constant.ERROR_NO_ENCONTRADO);
+            }else{
+                usuariosRepository.deleteById(id);
+                return true;
+            }
+
+        }catch(NoEncontradoException ex){
+            ex.printStackTrace();
+            throw new NoEncontradoException(ex.getMessage());
+        }catch(Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+    }
+
+    @Override
+    public List<ResponseDtoUsuario> listarUsuario() throws Exception {
+        List<ResponseDtoUsuario> listUsuario = new ArrayList<>();
+        try{
+            List<Usuario> usuarios = usuariosRepository.findAll();
+            for(Usuario u : usuarios){
+                listUsuario.add(mappingObjetoUsuarios.transforUserToResponse(u));
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+        return listUsuario;
     }
 }

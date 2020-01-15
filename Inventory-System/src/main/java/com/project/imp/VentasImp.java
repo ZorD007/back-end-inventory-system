@@ -80,7 +80,7 @@ public class VentasImp implements IVentasService {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //formato de fecha
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); //formato de fecha
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }

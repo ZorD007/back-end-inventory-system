@@ -3,9 +3,13 @@ package com.project.mapping;
 import com.project.dto.ReqDtoUsuario;
 import com.project.dto.ResponseDtoUsuario;
 import com.project.dto.ResponseDtoUsuarioLogin;
+import com.project.model.Producto;
 import com.project.model.Rol;
 import com.project.model.Usuario;
+import com.project.util.Constant;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class MappingObjetoUsuarios {
@@ -52,5 +56,24 @@ public class MappingObjetoUsuarios {
             throw new Exception();
         }
         return usuarioDto;
+    }
+
+    public Usuario transformarOptionalaUsuario(Optional<Usuario> usuarioOptional) throws Exception{
+        Usuario usuarioLocal = null;
+        try{
+            if(usuarioOptional.isPresent()){
+                usuarioLocal = new Usuario();
+                usuarioLocal.setIdUsuario(usuarioOptional.get().getIdUsuario());
+                usuarioLocal.setRol(usuarioOptional.get().getRol());
+                usuarioLocal.setNombreUsuario(usuarioOptional.get().getNombreUsuario());
+                usuarioLocal.setPasswordUsuario(usuarioOptional.get().getPasswordUsuario());
+                usuarioLocal.setUltimaFecha(usuarioOptional.get().getUltimaFecha());
+                usuarioLocal.setUserName(usuarioOptional.get().getUserName());
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(Constant.ERROR_SISTEMA);
+        }
+        return usuarioLocal;
     }
 }

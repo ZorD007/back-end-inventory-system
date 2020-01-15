@@ -105,17 +105,16 @@ public class MarcaImp implements IMarcaService {
 
     @Override
     public ResponseDtoMarca modificarMarca(Long id, ReqDtoMarca reqDtoMarca) throws Exception {
-        ResponseDtoMarca marcaLocal;
+        ResponseDtoMarca responseDtoMarca = null;
         try {
             Marca marca = marcaRepository.findById(id).get();
             if (null != reqDtoMarca){
                 marca.setNombreMarca(reqDtoMarca.getNombreMarcaDto());
-                marca.setIdMarca(reqDtoMarca.getIdMarcaDto());
 
                 Marca marcaActualizado = marcaRepository.save(marca);
-                marcaLocal = mappingObjetoMarca.transformModelaResponse(marcaActualizado);
-
-                marcaLocal = mappingObjetoMarca.transformModelaResponse(marcaRepository.saveAndFlush(marcaActualizado));
+                responseDtoMarca = mappingObjetoMarca.transformModelaResponse(marcaActualizado);
+                marca.setNombreMarca(reqDtoMarca.getNombreMarcaDto());
+                responseDtoMarca = mappingObjetoMarca.transformModelaResponse(marcaRepository.saveAndFlush(marca));
             }else{
                 throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
             }
@@ -126,6 +125,6 @@ public class MarcaImp implements IMarcaService {
             ex.printStackTrace();
             throw new Exception(ex.getMessage());
         }
-        return marcaLocal;
+        return responseDtoMarca;
     }
 }
