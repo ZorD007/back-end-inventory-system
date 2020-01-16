@@ -2,7 +2,6 @@ package com.project.imp;
 
 import com.project.dto.ReqDtoVentas;
 import com.project.dto.ResponseDtoVentas;
-import com.project.exception.NoMostrarException;
 import com.project.mapping.MappingObjetoVentas;
 import com.project.model.Ventas;
 import com.project.repository.UsuarioRepository;
@@ -58,6 +57,12 @@ public class VentasImp implements IVentasService {
 
     @Override
     public ResponseDtoVentas mostrarVenta(ReqDtoVentas reqDtoVentas) throws Exception {
+        return null;
+    }
+
+    /*
+    @Override
+    public ResponseDtoVentas mostrarVenta(ReqDtoVentas reqDtoVentas) throws Exception {
         ResponseDtoVentas ventasDtoLocal;
         Ventas ventaLocal;
         try {
@@ -77,6 +82,8 @@ public class VentasImp implements IVentasService {
         }
        return ventasDtoLocal;
     }
+
+     */
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

@@ -1,6 +1,7 @@
 package com.project.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "rol")
@@ -14,8 +15,8 @@ public class Rol {
     @Column(name = "cargo", nullable = false, unique = true)
     private String cargo;
 
-    @OneToOne(mappedBy = "rol", cascade = CascadeType.ALL)
-    private Usuario usuario;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol")
+    private List<Usuario> usuarioL;
 
     public Long getIdRol() {
         return idRol;
@@ -31,13 +32,5 @@ public class Rol {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

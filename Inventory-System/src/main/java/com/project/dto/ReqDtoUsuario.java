@@ -3,20 +3,11 @@ package com.project.dto;
 import java.util.Date;
 
 public class ReqDtoUsuario {
-    private Long idUsuarioDto;
-    private String nombreDto;
-    private String userNameDto;
-    private String passwordDto;
-    private Date fechaDto;
     private String cargoDto;
-
-    public Long getIdUsuarioDto() {
-        return idUsuarioDto;
-    }
-
-    public void setIdUsuarioDto(Long idUsuarioDto) {
-        this.idUsuarioDto = idUsuarioDto;
-    }
+    private Date fechaDto;
+    private String passwordDto;
+    private String userNameDto;
+    private String nombreDto;
 
     public String getNombreDto() {
         return nombreDto;

@@ -29,11 +29,6 @@ public class MappingObjetoVentas {
 
     public ResponseDtoVentas transformModeltoResponse(Ventas ventas) throws Exception{
         ResponseDtoVentas responseDtoVentasLocal;
-        //pruebalo
-        //como lo pruebo si no he hecho el controller xd
-
-        //entendamos el codigo cuando se invocara este metodo ok se invoca en el ven
-
         try{
             responseDtoVentasLocal = new ResponseDtoVentas();
             responseDtoVentasLocal.setFechaDto(ventas.getFechaVenta());

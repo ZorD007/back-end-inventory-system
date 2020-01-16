@@ -1,12 +1,10 @@
 package com.project.imp;
 
 import com.project.dto.ReqDtoSucursal;
-import com.project.dto.ResponseDtoProducto;
 import com.project.dto.ResponseDtoSucursal;
 import com.project.exception.NoActualizarException;
 import com.project.exception.NoEncontradoException;
 import com.project.mapping.MappingObjetoSucursal;
-import com.project.model.Producto;
 import com.project.model.Sucursal;
 import com.project.repository.SucursalRepository;
 import com.project.service.ISucursalService;

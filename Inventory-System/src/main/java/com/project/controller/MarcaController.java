@@ -4,6 +4,7 @@ import com.project.dto.ReqDtoMarca;
 import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
 import com.project.imp.MarcaImp;
+import com.project.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class MarcaController {
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
         }catch(Exception ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
@@ -41,7 +42,52 @@ public class MarcaController {
             rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
         }catch(Exception ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
+
+    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> buscarPorId(@PathVariable  Long id){
+        ResponseEntity<Object> rs = null;
+        try{
+            rs = new ResponseEntity<Object>(marcaImp.buscarPorId(id), HttpStatus.OK);
+        }catch(NoEncontradoException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
+
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
+    public ResponseEntity<Object> listarMarca(){
+        ResponseEntity<Object> rs = null;
+        try{
+            rs = new ResponseEntity<Object>(marcaImp.listarMarca(), HttpStatus.OK);
+        }catch(NoEncontradoException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NO_CONTENT);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
+
+    @RequestMapping(value = "/modify/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> modificarMarca(@PathVariable Long id, @RequestBody ReqDtoMarca reqDtoMarca){
+        ResponseEntity<Object> rs = null;
+        try{
+            rs = new ResponseEntity<Object>(marcaImp.modificarMarca(id, reqDtoMarca), HttpStatus.OK);
+        }catch(NoEncontradoException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_MODIFIED);
+        }catch(Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }

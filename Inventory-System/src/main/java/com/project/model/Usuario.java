@@ -24,7 +24,7 @@ public class Usuario {
     @Column(name = "last_login")
     private Date ultimaFecha;
 
-    @OneToOne
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rol", updatable = false, nullable = false)
     private Rol rol;
 

@@ -1,14 +1,11 @@
 package com.project.imp;
 
-import com.project.dto.ReqDtoProducto;
 import com.project.dto.ReqDtoRol;
-import com.project.dto.ResponseDtoProducto;
 import com.project.dto.ResponseDtoRol;
 import com.project.exception.NoActualizarException;
 import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
 import com.project.mapping.MappingObjetoRol;
-import com.project.model.Producto;
 import com.project.model.Rol;
 import com.project.repository.RolRepository;
 import com.project.service.IRolService;

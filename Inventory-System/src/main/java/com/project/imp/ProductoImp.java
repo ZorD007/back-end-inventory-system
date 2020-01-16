@@ -4,7 +4,6 @@ import com.project.dto.ReqDtoProducto;
 import com.project.dto.ResponseDtoProducto;
 import com.project.exception.NoActualizarException;
 import com.project.exception.NoEncontradoException;
-import com.project.exception.NoGuardadoException;
 import com.project.mapping.MappingObjetoProducto;
 import com.project.model.Producto;
 import com.project.repository.ProductoRepository;
@@ -58,20 +57,8 @@ public class ProductoImp implements IProductoService {
 
                 producto.setCantidad(reqDtoProducto.getCantidadDto());
                 producto.setPrecio(reqDtoProducto.getPrecioDto());
-
-                //producto.setIdProducto(reqDtoProducto.getIdProductoDto());
-                //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-                //producto.setMarca(reqDtoProducto.getMarcaDto());
-                //producto.setModelo(reqDtoProducto.getModeloDto());
-                //producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
-                //producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-
                 Producto productoActualizado = productoRepository.save(producto);
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoActualizado);
-
-                producto.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
-                producto.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.saveAndFlush(producto));
 
             }else{

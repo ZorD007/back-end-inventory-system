@@ -2,13 +2,11 @@ package com.project.imp;
 
 import com.project.dto.ReqDtoMarca;
 import com.project.dto.ResponseDtoMarca;
-import com.project.dto.ResponseDtoProducto;
 import com.project.exception.NoActualizarException;
 import com.project.exception.NoEncontradoException;
 import com.project.exception.NoGuardadoException;
 import com.project.mapping.MappingObjetoMarca;
 import com.project.model.Marca;
-import com.project.model.Producto;
 import com.project.repository.MarcaRepository;
 import com.project.service.IMarcaService;
 import com.project.util.Constant;

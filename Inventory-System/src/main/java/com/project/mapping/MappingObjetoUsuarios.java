@@ -3,7 +3,6 @@ package com.project.mapping;
 import com.project.dto.ReqDtoUsuario;
 import com.project.dto.ResponseDtoUsuario;
 import com.project.dto.ResponseDtoUsuarioLogin;
-import com.project.model.Producto;
 import com.project.model.Rol;
 import com.project.model.Usuario;
 import com.project.util.Constant;
@@ -18,7 +17,6 @@ public class MappingObjetoUsuarios {
         Usuario usuarioLocal = null;
         try{
             usuarioLocal = new Usuario();
-            usuarioLocal.setIdUsuario(reqDtoUsuario.getIdUsuarioDto());
             usuarioLocal.setNombreUsuario(reqDtoUsuario.getNombreDto());
             usuarioLocal.setUserName(reqDtoUsuario.getUserNameDto());
             usuarioLocal.setPasswordUsuario(reqDtoUsuario.getPasswordDto());

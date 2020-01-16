@@ -15,11 +15,8 @@ import com.project.repository.UsuarioRepository;
 import com.project.service.IPbkdf2EncryptService;
 import com.project.service.IUsuariosService;
 import com.project.util.Constant;
-import org.apache.tomcat.util.bcel.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +40,8 @@ public class UsuarioImp implements IUsuariosService {
         ResponseDtoUsuario responseDtoUsuario;
         Usuario usuario;
         try {
-            Usuario validarUserName = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
             Rol validarRol = rolRepository.findByCargo(reqDtoUsuario.getCargoDto());
+            Usuario validarUserName = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
             if (validarUserName == null && validarRol != null) {
                 usuario = new Usuario();
                 usuario.setNombreUsuario(reqDtoUsuario.getNombreDto());
@@ -71,8 +68,7 @@ public class UsuarioImp implements IUsuariosService {
         Usuario usuarioLocal;
         try {
             usuarioLocal = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
-            Rol validarCargo = rolRepository.findByCargo(usuarioLocal.getRol().getCargo());
-            if (usuarioLocal != null && validarCargo != null){
+            if (usuarioLocal != null){
                 return iPbkdf2EncryptService.validarPassword(reqDtoUsuario.getPasswordDto(), usuarioLocal.getPasswordUsuario());
             }else {
                 throw new NoValidarSesionException(Constant.ERROR_VALIDAR);

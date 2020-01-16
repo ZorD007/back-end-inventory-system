@@ -47,4 +47,19 @@ public class UsuariosController {
         }
         return rs;
     }
+
+    @RequestMapping(value = "/sessions", method = RequestMethod.POST)
+    public ResponseEntity<Object> buscarPorId(@PathVariable Long id){
+        ResponseEntity<Object> rs = null;
+        try {
+            rs = new ResponseEntity<Object>(usuarioImp.buscarPorId(id), HttpStatus.OK);
+        }catch (NoValidarSesionException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
 }
