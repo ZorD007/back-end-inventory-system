@@ -5,7 +5,9 @@ import com.project.dto.ResponseDtoProducto;
 import com.project.exception.NoActualizarException;
 import com.project.exception.NoEncontradoException;
 import com.project.mapping.MappingObjetoProducto;
+import com.project.model.Marca;
 import com.project.model.Producto;
+import com.project.repository.MarcaRepository;
 import com.project.repository.ProductoRepository;
 import com.project.service.IProductoService;
 import com.project.util.Constant;
@@ -21,25 +23,28 @@ public class ProductoImp implements IProductoService {
     @Autowired
     private ProductoRepository productoRepository;
     @Autowired
+    private MarcaRepository marcaRepository;
+    @Autowired
     private MappingObjetoProducto transformarObjetos;
 
     @Override
     public ResponseDtoProducto agregarProducto(ReqDtoProducto reqDtoProducto) throws Exception{
-        ResponseDtoProducto responseDtoProducto;
+        ResponseDtoProducto responseDtoProducto = null;
         Producto productoLocal;
 
         try{
-            productoLocal = new Producto();
-            productoLocal.setCantidad(reqDtoProducto.getCantidadDto());
-            productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-            productoLocal.setMarca(reqDtoProducto.getMarcaDto());
-            productoLocal.setModelo(reqDtoProducto.getModeloDto());
-            productoLocal.setPrecio(reqDtoProducto.getPrecioDto());
-            productoLocal.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
-            productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
-
-            responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.save(productoLocal));
-
+            Marca validarMarca = marcaRepository.findByNombreMarca(reqDtoProducto.getMarcaDto());
+            if (validarMarca != null){
+                productoLocal = new Producto();
+                productoLocal.setCantidad(reqDtoProducto.getCantidadDto());
+                productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
+                productoLocal.setMarca(validarMarca);
+                productoLocal.setModelo(reqDtoProducto.getModeloDto());
+                productoLocal.setPrecio(reqDtoProducto.getPrecioDto());
+                productoLocal.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
+                productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
+                responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.save(productoLocal));
+            }
         }catch(Exception ex){
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);
@@ -73,7 +78,6 @@ public class ProductoImp implements IProductoService {
 
     @Override
     public Producto buscarPorId(Long id) throws Exception {
-
         Producto productoLocal;
         try{
             productoLocal = transformarObjetos.transformarOptionaProducto(productoRepository.findById(id));

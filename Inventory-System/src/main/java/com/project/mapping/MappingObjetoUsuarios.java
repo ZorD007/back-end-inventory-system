@@ -20,7 +20,6 @@ public class MappingObjetoUsuarios {
             usuarioLocal.setNombreUsuario(reqDtoUsuario.getNombreDto());
             usuarioLocal.setUserName(reqDtoUsuario.getUserNameDto());
             usuarioLocal.setPasswordUsuario(reqDtoUsuario.getPasswordDto());
-            usuarioLocal.setUltimaFecha(reqDtoUsuario.getFechaDto());
             usuarioLocal.setRol(rol);
         }catch (Exception ex){
             ex.printStackTrace();
@@ -35,7 +34,6 @@ public class MappingObjetoUsuarios {
             usuarioDto = new ResponseDtoUsuario();
             usuarioDto.setNombreUsuarioDto(usuarioLocal.getNombreUsuario());
             usuarioDto.setUserNameDto(usuarioLocal.getUserName());
-            usuarioDto.setFechaUsuarioDto(usuarioLocal.getUltimaFecha());
             usuarioDto.setTipoRolDto(usuarioLocal.getRol().getCargo());
         }catch (Exception ex){
             ex.printStackTrace();
@@ -49,6 +47,7 @@ public class MappingObjetoUsuarios {
         try{
             usuarioDto = new ResponseDtoUsuarioLogin();
             usuarioDto.setUserNameDto(usuarioLocal.getUserName());
+            usuarioDto.setCargoDto(usuarioLocal.getRol().getCargo());
         }catch (Exception ex){
             ex.printStackTrace();
             throw new Exception();
@@ -65,7 +64,6 @@ public class MappingObjetoUsuarios {
                 usuarioLocal.setRol(usuarioOptional.get().getRol());
                 usuarioLocal.setNombreUsuario(usuarioOptional.get().getNombreUsuario());
                 usuarioLocal.setPasswordUsuario(usuarioOptional.get().getPasswordUsuario());
-                usuarioLocal.setUltimaFecha(usuarioOptional.get().getUltimaFecha());
                 usuarioLocal.setUserName(usuarioOptional.get().getUserName());
             }
         }catch (Exception ex){

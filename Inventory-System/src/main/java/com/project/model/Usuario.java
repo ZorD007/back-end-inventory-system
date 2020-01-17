@@ -21,9 +21,6 @@ public class Usuario {
     @Column(name = "password", nullable = false)
     private String passwordUsuario;
 
-    @Column(name = "last_login")
-    private Date ultimaFecha;
-
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_rol", updatable = false, nullable = false)
     private Rol rol;
@@ -58,14 +55,6 @@ public class Usuario {
 
     public void setPasswordUsuario(String passwordUsuario) {
         this.passwordUsuario = passwordUsuario;
-    }
-
-    public Date getUltimaFecha() {
-        return ultimaFecha;
-    }
-
-    public void setUltimaFecha(Date ultimaFecha) {
-        this.ultimaFecha = ultimaFecha;
     }
 
     public Rol getRol() {

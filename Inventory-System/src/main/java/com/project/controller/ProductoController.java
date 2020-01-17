@@ -25,7 +25,7 @@ public class ProductoController {
             rs = new ResponseEntity<Object>(productoImp.agregarProducto(reqDtoProducto), HttpStatus.OK);
         }catch (NoGuardadoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            rs = new ResponseEntity<Object>(Constant.ERROR_GUARDAR, HttpStatus.NOT_ACCEPTABLE);
         }catch (Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -52,7 +52,7 @@ public class ProductoController {
             rs = new ResponseEntity<Object>(productoImp.eliminarProducto(id),HttpStatus.OK);
         }catch (NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            rs = new ResponseEntity<Object>(Constant.ERROR_ELIMINAR, HttpStatus.NOT_FOUND);
         }catch (Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -67,7 +67,7 @@ public class ProductoController {
             rs = new ResponseEntity<Object>(productoImp.listarProducto(),HttpStatus.OK);
         }catch (NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.NOT_FOUND);
         }catch (Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR) ;
@@ -76,13 +76,13 @@ public class ProductoController {
     }
 
     @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> buscarPorId(@PathVariable  Long id){
+    public ResponseEntity<Object> buscarPorIdProducto(@PathVariable  Long id){
         ResponseEntity<Object> rs = null;
         try{
             rs = new ResponseEntity<Object>(productoImp.buscarPorId(id), HttpStatus.OK);
         }catch(NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.NOT_FOUND);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);

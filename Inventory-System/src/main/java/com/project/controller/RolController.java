@@ -25,7 +25,7 @@ public class RolController {
             rs = new ResponseEntity<Object>(rolImp.añadirRol(reqDtoRol), HttpStatus.OK);
         } catch (NoGuardadoException ex) {
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            rs = new ResponseEntity<Object>(Constant.ERROR_GUARDAR, HttpStatus.NOT_ACCEPTABLE);
         } catch (Exception ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -34,13 +34,13 @@ public class RolController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> buscarPorId(@PathVariable Long id){
+    public ResponseEntity<Object> buscarPorIdRol(@PathVariable Long id){
         ResponseEntity<Object> rs = null;
         try {
             rs = new ResponseEntity<Object>(rolImp.buscarPorId(id), HttpStatus.OK);
         } catch (NoEncontradoException ex) {
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.NOT_FOUND);
         } catch (Exception ex) {
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -85,7 +85,7 @@ public class RolController {
             rs = new ResponseEntity<Object>(rolImp.listarRol(), HttpStatus.OK);
         }catch(NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_MODIFIED);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.NOT_MODIFIED);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -5,6 +5,7 @@ import com.project.dto.ReqDtoUsuarioLogin;
 import com.project.exception.NoGuardadoException;
 import com.project.exception.NoValidarSesionException;
 import com.project.imp.UsuarioImp;
+import com.project.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,10 +26,10 @@ public class UsuariosController {
             rs = new ResponseEntity<Object>(usuarioImp.registrarUsuario(reqDtoUsuario), HttpStatus.OK);
         }catch (NoGuardadoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            rs = new ResponseEntity<Object>(Constant.ERROR_GUARDAR, HttpStatus.NOT_ACCEPTABLE);
         }catch (Exception ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
@@ -40,25 +41,25 @@ public class UsuariosController {
             rs = new ResponseEntity<Object>(usuarioImp.validarSesion(reqDtoUsuario), HttpStatus.OK);
         }catch (NoValidarSesionException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+            rs = new ResponseEntity<Object>(Constant.ERROR_VALIDAR, HttpStatus.UNAUTHORIZED);
         }catch (Exception ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }
 
-    @RequestMapping(value = "/sessions", method = RequestMethod.POST)
-    public ResponseEntity<Object> buscarPorId(@PathVariable Long id){
+    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> buscarPorIdUsuario(@PathVariable Long id){
         ResponseEntity<Object> rs = null;
         try {
             rs = new ResponseEntity<Object>(usuarioImp.buscarPorId(id), HttpStatus.OK);
         }catch (NoValidarSesionException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.UNAUTHORIZED);
         }catch (Exception ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
         }
         return rs;
     }

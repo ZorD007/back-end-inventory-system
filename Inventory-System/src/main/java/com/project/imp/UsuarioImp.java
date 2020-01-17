@@ -58,7 +58,7 @@ public class UsuarioImp implements IUsuariosService {
             throw new NoGuardadoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
-            throw new Exception();
+            throw new Exception(ex.getMessage());
         }
         return responseDtoUsuario;
     }
@@ -68,7 +68,9 @@ public class UsuarioImp implements IUsuariosService {
         Usuario usuarioLocal;
         try {
             usuarioLocal = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
-            if (usuarioLocal != null){
+            Usuario u = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
+            Rol validarRol = rolRepository.findByCargo(u.getRol().getCargo());
+            if (usuarioLocal != null && validarRol != null){
                 return iPbkdf2EncryptService.validarPassword(reqDtoUsuario.getPasswordDto(), usuarioLocal.getPasswordUsuario());
             }else {
                 throw new NoValidarSesionException(Constant.ERROR_VALIDAR);
@@ -78,7 +80,7 @@ public class UsuarioImp implements IUsuariosService {
             throw new NoValidarSesionException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
     }
 
@@ -95,7 +97,7 @@ public class UsuarioImp implements IUsuariosService {
             throw new NoEncontradoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
         return usuarioLocal;
     }
@@ -116,6 +118,7 @@ public class UsuarioImp implements IUsuariosService {
             }
         }catch(Exception ex){
             ex.printStackTrace();
+            throw new Exception(ex.getMessage());
         }
         return responseDtoUsuario;
     }
@@ -136,7 +139,7 @@ public class UsuarioImp implements IUsuariosService {
             throw new NoEncontradoException(ex.getMessage());
         }catch(Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
     }
 
@@ -150,8 +153,26 @@ public class UsuarioImp implements IUsuariosService {
             }
         }catch(Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
         return listUsuario;
+    }
+
+    @Override
+    public boolean validarRol(String cargo) throws Exception {
+        try {
+            Rol validarRol = rolRepository.findByCargo(cargo);
+            if (validarRol != null){
+                return true;
+            }else{
+                throw new NoValidarSesionException(Constant.ERROR_VALIDAR);
+        }
+        }catch (NoValidarSesionException ex){
+            ex.printStackTrace();
+            throw new NoValidarSesionException(ex.getMessage());
+        }catch (Exception ex){
+            ex.printStackTrace();
+            throw new Exception(ex.getMessage());
+        }
     }
 }

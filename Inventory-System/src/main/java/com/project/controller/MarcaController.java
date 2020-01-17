@@ -25,7 +25,7 @@ public class MarcaController {
             rs = new ResponseEntity<Object>(marcaImp.agregarMarca(reqDtoMarca), HttpStatus.OK);
         }catch(NoGuardadoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+            rs = new ResponseEntity<Object>(Constant.ERROR_GUARDAR, HttpStatus.NOT_ACCEPTABLE);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -39,7 +39,7 @@ public class MarcaController {
             rs = new ResponseEntity<Object>(marcaImp.eliminarMarca(id), HttpStatus.OK);
         }catch(NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            rs = new ResponseEntity<Object>(Constant.ERROR_ELIMINAR, HttpStatus.NOT_FOUND);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -48,13 +48,13 @@ public class MarcaController {
     }
 
     @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> buscarPorId(@PathVariable  Long id){
+    public ResponseEntity<Object> buscarPorIdMarca(@PathVariable  Long id){
         ResponseEntity<Object> rs = null;
         try{
             rs = new ResponseEntity<Object>(marcaImp.buscarPorId(id), HttpStatus.OK);
         }catch(NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_FOUND);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.NOT_FOUND);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -69,7 +69,7 @@ public class MarcaController {
             rs = new ResponseEntity<Object>(marcaImp.listarMarca(), HttpStatus.OK);
         }catch(NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NO_CONTENT);
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.NO_CONTENT);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -84,7 +84,7 @@ public class MarcaController {
             rs = new ResponseEntity<Object>(marcaImp.modificarMarca(id, reqDtoMarca), HttpStatus.OK);
         }catch(NoEncontradoException ex){
             ex.printStackTrace();
-            rs = new ResponseEntity<Object>(ex.getMessage(), HttpStatus.NOT_MODIFIED);
+            rs = new ResponseEntity<Object>(Constant.ERROR_ACTUALIZAR, HttpStatus.NOT_MODIFIED);
         }catch(Exception ex){
             ex.printStackTrace();
             rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
