@@ -10,7 +10,7 @@ import java.util.List;
 public interface IUsuariosService {
 
     ResponseDtoUsuario registrarUsuario(ReqDtoUsuario reqDtoUsuario) throws Exception;
-    boolean validarSesion(ReqDtoUsuarioLogin reqDtoUsuario) throws Exception;
+    ResponseDtoUsuario validarSesion(ReqDtoUsuarioLogin reqDtoUsuario) throws Exception;
     Usuario buscarPorId(Long id) throws Exception;
     ResponseDtoUsuario modificarUsuario(Long id, ReqDtoUsuario reqDtoUsuario) throws Exception;
     boolean eliminarUsuario(Long id) throws Exception;

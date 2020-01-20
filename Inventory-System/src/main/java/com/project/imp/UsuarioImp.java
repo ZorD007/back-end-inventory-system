@@ -64,14 +64,21 @@ public class UsuarioImp implements IUsuariosService {
     }
 
     @Override
-    public boolean validarSesion(ReqDtoUsuarioLogin reqDtoUsuario) throws Exception {
+    public ResponseDtoUsuario validarSesion(ReqDtoUsuarioLogin reqDtoUsuario) throws Exception {
         Usuario usuarioLocal;
         try {
             usuarioLocal = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
             Usuario u = usuariosRepository.findByUserName(reqDtoUsuario.getUserNameDto());
             Rol validarRol = rolRepository.findByCargo(u.getRol().getCargo());
             if (usuarioLocal != null && validarRol != null){
-                return iPbkdf2EncryptService.validarPassword(reqDtoUsuario.getPasswordDto(), usuarioLocal.getPasswordUsuario());
+
+                if(iPbkdf2EncryptService.validarPassword(reqDtoUsuario.getPasswordDto(), usuarioLocal.getPasswordUsuario()))
+                {
+                    MappingObjetoUsuarios m = new MappingObjetoUsuarios();
+                    return m.transforUserToResponse(usuarioLocal);
+                }else{
+                    throw new NoValidarSesionException(Constant.ERROR_VALIDAR);
+                }
             }else {
                 throw new NoValidarSesionException(Constant.ERROR_VALIDAR);
             }
