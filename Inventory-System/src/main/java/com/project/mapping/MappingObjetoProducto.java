@@ -21,7 +21,8 @@ public class MappingObjetoProducto {
                responseDtoProducto.setSistemaOperativoDto(producto.getSistemaOperativo());
                responseDtoProducto.setModeloDto(producto.getModelo());
                responseDtoProducto.setPrecioDto(producto.getPrecio());
-
+               // aqui agrego la marca a la tabla
+               responseDtoProducto.setMarcaDto(producto.getMarca().getNombreMarca());
            }
        } catch (Exception ex){
            ex.printStackTrace();

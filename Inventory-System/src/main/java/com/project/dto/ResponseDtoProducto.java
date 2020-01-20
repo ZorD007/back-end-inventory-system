@@ -12,7 +12,16 @@ public class ResponseDtoProducto {
     private int precioDto;
     private Date fechaProductoDto;
     private int cantidadDto;
+    // y estoo
+    private String marcaDto;
 
+    public String getMarcaDto() {
+        return marcaDto;
+    }
+
+    public void setMarcaDto(String marcaDto) {
+        this.marcaDto = marcaDto;
+    }
 
     public Long getIdProductoDto() {
         return idProductoDto;
