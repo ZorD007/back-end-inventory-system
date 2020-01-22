@@ -15,12 +15,14 @@ public class MappingObjetoProducto {
        try{
            if (null != producto){
                responseDtoProducto = new ResponseDtoProducto();
+               responseDtoProducto.setIdProductoDto(producto.getIdProducto());
                responseDtoProducto.setCantidadDto(producto.getCantidad());
                responseDtoProducto.setFechaProductoDto(producto.getFechaProducto());
                responseDtoProducto.setSistemaOperativoDto(producto.getSistemaOperativo());
                responseDtoProducto.setModeloDto(producto.getModelo());
                responseDtoProducto.setPrecioCompraDto(producto.getPrecioCompra());
                responseDtoProducto.setPrecioVentaDto(producto.getPrecioVenta());
+               responseDtoProducto.setMarcaDto(producto.getMarca().getNombreMarca());
 
            }
        } catch (Exception ex){

@@ -65,9 +65,9 @@ public class VentasImp implements IVentasService {
         Ventas ventasLocal = null;
         try {
             //Usuario validarUsuario = usuarioRepository.findByUserName(reqDtoVentas.getVendedorDto());
-            Ventas validarVenta = ventasRepository.findVentasByDateAndSeller(reqDtoVentas.getFechaVentaDto());
+            List<Ventas> validarVenta = ventasRepository.findByFechaVenta(reqDtoVentas.getFechaVentaDto());
             if (validarVenta != null){
-                ventasLocal = validarVenta;
+                //ventasLocal = validarVenta;
                 responseDtoVentas = mappingObjetoVentas.transformModeltoResponse(ventasLocal);
             }
         }catch (NoEncontradoException ex){

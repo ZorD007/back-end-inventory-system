@@ -1,5 +1,7 @@
 package com.project.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Ventas {
     private long nuOperacion;
 
     @Column(name = "fecha", nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
     private Date fechaVenta;
 
     @Column(name = "cantidad_ventas", nullable = false)
