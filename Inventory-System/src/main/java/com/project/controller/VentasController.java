@@ -1,6 +1,7 @@
 package com.project.controller;
 
 import com.project.dto.ReqDtoVentas;
+import com.project.dto.ReqDtoVentasM;
 import com.project.exception.NoEncontradoException;
 import com.project.imp.VentasImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class VentasController {
         return rs;
     }
 
-    @RequestMapping(value = "/mostrar", method = RequestMethod.GET)
-    public ResponseEntity<Object> mostrarVenta(@RequestBody ReqDtoVentas reqDtoVentas) {
+    @RequestMapping(value = "/mostrar", method = RequestMethod.PUT)
+    public ResponseEntity<Object> mostrarVenta(@RequestBody ReqDtoVentasM reqDtoVentas) {
         ResponseEntity<Object> rs = null;
         try {
             rs = new ResponseEntity<Object>(ventasImp.mostrarVenta(reqDtoVentas), HttpStatus.OK);

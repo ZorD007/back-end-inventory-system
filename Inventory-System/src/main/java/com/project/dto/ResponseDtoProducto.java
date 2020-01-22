@@ -1,26 +1,15 @@
 package com.project.dto;
 
-import com.project.model.Marca;
-
 import java.util.Date;
 
 public class ResponseDtoProducto {
 
-    private Long idProductoDto;
     private String modeloDto;
     private String sistemaOperativoDto;
-    private int precioDto;
+    private int precioCompraDto;
+    private int precioVentaDto;
     private Date fechaProductoDto;
     private int cantidadDto;
-
-
-    public Long getIdProductoDto() {
-        return idProductoDto;
-    }
-
-    public void setIdProductoDto(Long idProductoDto) {
-        this.idProductoDto = idProductoDto;
-    }
 
     public String getModeloDto() {
         return modeloDto;
@@ -38,12 +27,20 @@ public class ResponseDtoProducto {
         this.sistemaOperativoDto = sistemaOperativoDto;
     }
 
-    public int getPrecioDto() {
-        return precioDto;
+    public int getPrecioCompraDto() {
+        return precioCompraDto;
     }
 
-    public void setPrecioDto(int precioDto) {
-        this.precioDto = precioDto;
+    public void setPrecioCompraDto(int precioCompraDto) {
+        this.precioCompraDto = precioCompraDto;
+    }
+
+    public int getPrecioVentaDto() {
+        return precioVentaDto;
+    }
+
+    public void setPrecioVentaDto(int precioVentaDto) {
+        this.precioVentaDto = precioVentaDto;
     }
 
     public Date getFechaProductoDto() {

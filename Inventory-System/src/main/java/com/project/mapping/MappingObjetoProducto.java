@@ -15,12 +15,12 @@ public class MappingObjetoProducto {
        try{
            if (null != producto){
                responseDtoProducto = new ResponseDtoProducto();
-               responseDtoProducto.setIdProductoDto(producto.getIdProducto());
                responseDtoProducto.setCantidadDto(producto.getCantidad());
                responseDtoProducto.setFechaProductoDto(producto.getFechaProducto());
                responseDtoProducto.setSistemaOperativoDto(producto.getSistemaOperativo());
                responseDtoProducto.setModeloDto(producto.getModelo());
-               responseDtoProducto.setPrecioDto(producto.getPrecio());
+               responseDtoProducto.setPrecioCompraDto(producto.getPrecioCompra());
+               responseDtoProducto.setPrecioVentaDto(producto.getPrecioVenta());
 
            }
        } catch (Exception ex){
@@ -35,8 +35,14 @@ public class MappingObjetoProducto {
         try {
             if(productoOptional.isPresent()){
                 producto = new Producto();
-                producto.setPrecio(productoOptional.get().getPrecio());
+                producto.setIdProducto(productoOptional.get().getIdProducto());
+                producto.setMarca(productoOptional.get().getMarca());
+                producto.setPrecioCompra(productoOptional.get().getPrecioCompra());
+                producto.setPrecioVenta(productoOptional.get().getPrecioVenta());
+                producto.setFechaProducto(productoOptional.get().getFechaProducto());
+                producto.setModelo(productoOptional.get().getModelo());
                 producto.setCantidad(productoOptional.get().getCantidad());
+                producto.setSistemaOperativo(productoOptional.get().getSistemaOperativo());
             }
         }catch (Exception ex){
             ex.printStackTrace();
