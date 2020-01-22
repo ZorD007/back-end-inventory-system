@@ -1,7 +1,5 @@
 package com.project.dto;
 
-import com.project.model.Marca;
-
 import java.util.Date;
 
 public class ReqDtoProducto {
@@ -9,7 +7,8 @@ public class ReqDtoProducto {
     private Long idProductoDto;
     private String modeloDto;
     private String sistemaOperativoDto;
-    private int precioDto;
+    private int precioCompraDto;
+    private int precioVentaDto;
     private Date fechaProductoDto;
     private int cantidadDto;
     private String marcaDto;
@@ -38,12 +37,20 @@ public class ReqDtoProducto {
         this.sistemaOperativoDto = sistemaOperativoDto;
     }
 
-    public int getPrecioDto() {
-        return precioDto;
+    public int getPrecioCompraDto() {
+        return precioCompraDto;
     }
 
-    public void setPrecioDto(int precioDto) {
-        this.precioDto = precioDto;
+    public void setPrecioCompraDto(int precioCompraDto) {
+        this.precioCompraDto = precioCompraDto;
+    }
+
+    public int getPrecioVentaDto() {
+        return precioVentaDto;
+    }
+
+    public void setPrecioVentaDto(int precioVentaDto) {
+        this.precioVentaDto = precioVentaDto;
     }
 
     public Date getFechaProductoDto() {

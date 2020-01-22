@@ -40,7 +40,8 @@ public class ProductoImp implements IProductoService {
                 productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
                 productoLocal.setMarca(validarMarca);
                 productoLocal.setModelo(reqDtoProducto.getModeloDto());
-                productoLocal.setPrecio(reqDtoProducto.getPrecioDto());
+                productoLocal.setPrecioCompra(reqDtoProducto.getPrecioCompraDto());
+                productoLocal.setPrecioVenta(reqDtoProducto.getPrecioVentaDto());
                 productoLocal.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
                 productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.save(productoLocal));
@@ -61,7 +62,7 @@ public class ProductoImp implements IProductoService {
             if(null != reqDtoProducto){
 
                 producto.setCantidad(reqDtoProducto.getCantidadDto());
-                producto.setPrecio(reqDtoProducto.getPrecioDto());
+                producto.setPrecioVenta(reqDtoProducto.getPrecioVentaDto());
                 Producto productoActualizado = productoRepository.save(producto);
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoActualizado);
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.saveAndFlush(producto));
@@ -77,12 +78,15 @@ public class ProductoImp implements IProductoService {
     }
 
     @Override
-    public Producto buscarPorId(Long id) throws Exception {
+    public ResponseDtoProducto buscarPorId(Long id) throws Exception {
+        ResponseDtoProducto dtoProducto;
         Producto productoLocal;
         try{
             productoLocal = transformarObjetos.transformarOptionaProducto(productoRepository.findById(id));
             if(null == productoLocal){
                 throw new NoEncontradoException(Constant.ERROR_NO_ENCONTRADO);
+            }else {
+                return transformarObjetos.transformarProductoResponseDto(productoLocal);
             }
         }catch (NoEncontradoException ex){
             ex.printStackTrace();
@@ -91,7 +95,6 @@ public class ProductoImp implements IProductoService {
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);
         }
-        return productoLocal;
     }
 
     @Override

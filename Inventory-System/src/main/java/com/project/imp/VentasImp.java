@@ -1,8 +1,12 @@
 package com.project.imp;
 
 import com.project.dto.ReqDtoVentas;
+import com.project.dto.ReqDtoVentasM;
+import com.project.dto.ResponseDtoUsuario;
 import com.project.dto.ResponseDtoVentas;
+import com.project.exception.NoEncontradoException;
 import com.project.mapping.MappingObjetoVentas;
+import com.project.model.Usuario;
 import com.project.model.Ventas;
 import com.project.repository.UsuarioRepository;
 import com.project.repository.VentasRepository;
@@ -56,39 +60,23 @@ public class VentasImp implements IVentasService {
     }
 
     @Override
-    public ResponseDtoVentas mostrarVenta(ReqDtoVentas reqDtoVentas) throws Exception {
-        return null;
-    }
-
-    /*
-    @Override
-    public ResponseDtoVentas mostrarVenta(ReqDtoVentas reqDtoVentas) throws Exception {
-        ResponseDtoVentas ventasDtoLocal;
-        Ventas ventaLocal;
+    public ResponseDtoVentas mostrarVenta(ReqDtoVentasM reqDtoVentas) throws Exception {
+        ResponseDtoVentas responseDtoVentas = null;
+        Ventas ventasLocal = null;
         try {
-            Ventas validateSell = ventasRepository.findByDateAndSeller(reqDtoVentas.getRangoFechaDto(), usuarioRepository.findByUserName(reqDtoVentas.getVendedorDto()));
-            if (validateSell != null){
-                ventaLocal = validateSell;
-                ventasDtoLocal = mappingObjetoVentas.transformModeltoResponse(ventaLocal);
-            }else {
-                throw new NoMostrarException(Constant.ERROR_NO_ENCONTRADO);
+            //Usuario validarUsuario = usuarioRepository.findByUserName(reqDtoVentas.getVendedorDto());
+            Ventas validarVenta = ventasRepository.findVentasByDateAndSeller(reqDtoVentas.getFechaVentaDto());
+            if (validarVenta != null){
+                ventasLocal = validarVenta;
+                responseDtoVentas = mappingObjetoVentas.transformModeltoResponse(ventasLocal);
             }
-        }catch (NoMostrarException ex){
+        }catch (NoEncontradoException ex){
             ex.printStackTrace();
-            throw new NoMostrarException(ex.getMessage());
+            throw new NoEncontradoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
             throw new Exception(ex.getMessage());
         }
-       return ventasDtoLocal;
-    }
-
-     */
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy"); //formato de fecha
-        dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        return responseDtoVentas;
     }
 }

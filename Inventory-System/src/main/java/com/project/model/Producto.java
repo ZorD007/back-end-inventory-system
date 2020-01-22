@@ -19,8 +19,11 @@ public class Producto {
     @Column(name = "sistema_operativo", nullable = false)
     private String sistemaOperativo;
 
-    @Column(name = "precio", nullable = false)
-    private int precio;
+    @Column(name = "precio_compra", nullable = false)
+    private int precioCompra;
+
+    @Column(name = "precio_venta", nullable = false)
+    private int precioVenta;
 
     @Column(name = "fecha", nullable = false)
     private Date fechaProducto;
@@ -61,12 +64,20 @@ public class Producto {
         this.sistemaOperativo = sistemaOperativo;
     }
 
-    public int getPrecio() {
-        return precio;
+    public int getPrecioCompra() {
+        return precioCompra;
     }
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
+    public void setPrecioCompra(int precio) {
+        this.precioCompra = precio;
+    }
+
+    public int getPrecioVenta() {
+        return precioVenta;
+    }
+
+    public void setPrecioVenta(int precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
     public Date getFechaProducto() {

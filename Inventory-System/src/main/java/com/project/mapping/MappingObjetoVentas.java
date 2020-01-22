@@ -38,7 +38,8 @@ public class MappingObjetoVentas {
             for(VentasProducto vp : ventas.getVentasL() ){
                 vp.getProducto().getMarca();
                 vp.getProducto().getCantidad();
-                vp.getProducto().getPrecio();
+                vp.getProducto().getPrecioCompra();
+                vp.getProducto().getPrecioVenta();
                 vp.getProducto().getModelo();
                 vp.getProducto().getSistemaOperativo();
                 vp.getProducto().getFechaProducto();
