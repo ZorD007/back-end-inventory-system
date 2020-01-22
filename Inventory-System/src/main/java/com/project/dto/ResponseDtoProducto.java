@@ -4,12 +4,23 @@ import java.util.Date;
 
 public class ResponseDtoProducto {
 
+    private Long idProductoDto;
     private String modeloDto;
     private String sistemaOperativoDto;
+    private String marcaDto;
     private int precioCompraDto;
     private int precioVentaDto;
     private Date fechaProductoDto;
     private int cantidadDto;
+
+
+    public Long getIdProductoDto() {
+        return idProductoDto;
+    }
+
+    public void setIdProductoDto(Long idProductoDto) {
+        this.idProductoDto = idProductoDto;
+    }
 
     public String getModeloDto() {
         return modeloDto;
@@ -25,6 +36,14 @@ public class ResponseDtoProducto {
 
     public void setSistemaOperativoDto(String sistemaOperativoDto) {
         this.sistemaOperativoDto = sistemaOperativoDto;
+    }
+
+    public String getMarcaDto() {
+        return marcaDto;
+    }
+
+    public void setMarcaDto(String marcaDto) {
+        this.marcaDto = marcaDto;
     }
 
     public int getPrecioCompraDto() {

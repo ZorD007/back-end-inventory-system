@@ -13,10 +13,10 @@ import java.util.List;
 @Repository
 public interface VentasRepository extends JpaRepository<Ventas, Long> {
 
-    @Query(value = "SELECT u FROM Ventas u WHERE u.fechaVenta >= :fechaInicio and u.fechaVenta <= :fechaFin",
+    @Query(value = "SELECT * FROM Ventas u WHERE u.fechaVenta >= :fechaInicio and u.fechaVenta <= :fechaFin",
             nativeQuery = true)
     List<Ventas> findVentasByDate(@Param("fechaInicio") Date fechaInicio, @Param("fechaFin") Date fechaFin);
 
-    @Query(value = "SELECT u FROM Ventas u WHERE u.fechaVenta == :fechaVenta", nativeQuery = true)
-    Ventas findVentasByDateAndSeller(@Param("fechaVenta")Date fechaVenta);
+    //@Query(value = "SELECT * FROM Ventas u WHERE u.fechaVenta = :fechaVenta", nativeQuery = true)
+    List<Ventas> findByFechaVenta(Date fechaVenta);
 }
