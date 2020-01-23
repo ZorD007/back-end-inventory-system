@@ -48,7 +48,7 @@ public class RolController {
         return rs;
     }
 
-    @RequestMapping(value = "/modify/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> modificarRol(@PathVariable  Long id, @RequestBody ReqDtoRol reqDtoRol){
         ResponseEntity<Object> rs = null;
         try{
@@ -63,7 +63,7 @@ public class RolController {
         return rs;
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> eliminarRol(@PathVariable  Long id){
         ResponseEntity<Object> rs = null;
         try{

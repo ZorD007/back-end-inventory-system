@@ -32,7 +32,7 @@ public class MarcaController {
         }
         return rs;
     }
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> eliminarMarca(@PathVariable  Long id){
         ResponseEntity<Object> rs = null;
         try{
@@ -47,7 +47,7 @@ public class MarcaController {
         return rs;
     }
 
-    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> buscarPorIdMarca(@PathVariable  Long id){
         ResponseEntity<Object> rs = null;
         try{
@@ -77,7 +77,7 @@ public class MarcaController {
         return rs;
     }
 
-    @RequestMapping(value = "/modify/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Object> modificarMarca(@PathVariable Long id, @RequestBody ReqDtoMarca reqDtoMarca){
         ResponseEntity<Object> rs = null;
         try{

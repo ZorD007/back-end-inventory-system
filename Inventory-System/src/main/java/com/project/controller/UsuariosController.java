@@ -49,7 +49,7 @@ public class UsuariosController {
         return rs;
     }
 
-    @RequestMapping(value = "/search/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<Object> buscarPorIdUsuario(@PathVariable Long id){
         ResponseEntity<Object> rs = null;
         try {
