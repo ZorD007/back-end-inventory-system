@@ -34,18 +34,7 @@ public class MappingObjetoVentas {
             responseDtoVentasLocal.setFechaDto(ventas.getFechaVenta());
             responseDtoVentasLocal.setCantidadVendidoDto(ventas.getCantidadVentas());
             responseDtoVentasLocal.setNombreVendedorDto(ventas.getUsuario().getNombreUsuario());
-            List<VentasProducto> ventasProductoList = new ArrayList<>();
-            for(VentasProducto vp : ventas.getVentasL() ){
-                vp.getProducto().getMarca();
-                vp.getProducto().getCantidad();
-                vp.getProducto().getPrecioCompra();
-                vp.getProducto().getPrecioVenta();
-                vp.getProducto().getModelo();
-                vp.getProducto().getSistemaOperativo();
-                vp.getProducto().getFechaProducto();
-                ventasProductoList.add(vp);
-            }
-            responseDtoVentasLocal.getProductoDto().setProductoL(ventasProductoList);
+            responseDtoVentasLocal.setSucursalDto(ventas.getSucursal().getNombreSucursal());
         }catch(Exception ex){
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);

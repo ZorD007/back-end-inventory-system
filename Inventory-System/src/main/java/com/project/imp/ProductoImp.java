@@ -22,8 +22,10 @@ public class ProductoImp implements IProductoService {
 
     @Autowired
     private ProductoRepository productoRepository;
+
     @Autowired
     private MarcaRepository marcaRepository;
+
     @Autowired
     private MappingObjetoProducto transformarObjetos;
 
@@ -43,7 +45,6 @@ public class ProductoImp implements IProductoService {
                 productoLocal.setPrecioCompra(reqDtoProducto.getPrecioCompraDto());
                 productoLocal.setPrecioVenta(reqDtoProducto.getPrecioVentaDto());
                 productoLocal.setSistemaOperativo(reqDtoProducto.getSistemaOperativoDto());
-                productoLocal.setFechaProducto(reqDtoProducto.getFechaProductoDto());
                 responseDtoProducto = transformarObjetos.transformarProductoResponseDto(productoRepository.save(productoLocal));
             }
         }catch(Exception ex){

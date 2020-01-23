@@ -23,7 +23,6 @@ public class MappingObjetoProducto {
                responseDtoProducto.setPrecioCompraDto(producto.getPrecioCompra());
                responseDtoProducto.setPrecioVentaDto(producto.getPrecioVenta());
                responseDtoProducto.setMarcaDto(producto.getMarca().getNombreMarca());
-
            }
        } catch (Exception ex){
            ex.printStackTrace();

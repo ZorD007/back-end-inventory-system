@@ -1,15 +1,12 @@
 package com.project.dto;
 
-import com.project.model.Producto;
-
 import java.util.Date;
 
 public class ResponseDtoVentas {
     private String nombreVendedorDto;
     private Date fechaDto;
-    private Producto productoDto;
+    private String productoDto;
     private int cantidadVendidoDto;
-    private int ventaTotalDto;
     private String sucursalDto;
 
     public String getNombreVendedorDto() {
@@ -28,11 +25,11 @@ public class ResponseDtoVentas {
         this.fechaDto = fechaDto;
     }
 
-    public Producto getProductoDto() {
+    public String getProductoDto() {
         return productoDto;
     }
 
-    public void setProductoDto(Producto productoDto) {
+    public void setProductoDto(String productoDto) {
         this.productoDto = productoDto;
     }
 
@@ -42,14 +39,6 @@ public class ResponseDtoVentas {
 
     public void setCantidadVendidoDto(int cantidadVendidoDto) {
         this.cantidadVendidoDto = cantidadVendidoDto;
-    }
-
-    public int getVentaTotalDto() {
-        return ventaTotalDto;
-    }
-
-    public void setVentaTotalDto(int ventaTotalDto) {
-        this.ventaTotalDto = ventaTotalDto;
     }
 
     public String getSucursalDto() {

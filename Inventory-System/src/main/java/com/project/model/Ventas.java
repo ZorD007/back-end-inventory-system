@@ -19,7 +19,7 @@ public class Ventas {
     private long nuOperacion;
 
     @Column(name = "fecha", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern="yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date fechaVenta;
 
     @Column(name = "cantidad_ventas", nullable = false)
