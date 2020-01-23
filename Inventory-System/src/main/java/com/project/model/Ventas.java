@@ -23,7 +23,7 @@ public class Ventas {
     private Date fechaVenta;
 
     @Column(name = "cantidad_ventas", nullable = false)
-    private int cantidadVentas;
+    private int cantidadVendidos;
 
     @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario", nullable = false)
@@ -60,12 +60,12 @@ public class Ventas {
         this.fechaVenta = fechaVenta;
     }
 
-    public int getCantidadVentas() {
-        return cantidadVentas;
+    public int getCantidadVendidos() {
+        return cantidadVendidos;
     }
 
-    public void setCantidadVentas(int cantidadVentas) {
-        this.cantidadVentas = cantidadVentas;
+    public void setCantidadVendidos(int cantidadVendidos) {
+        this.cantidadVendidos = cantidadVendidos;
     }
 
     public Usuario getUsuario() {

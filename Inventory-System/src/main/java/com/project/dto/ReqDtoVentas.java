@@ -3,16 +3,10 @@ package com.project.dto;
 import java.util.Date;
 
 public class ReqDtoVentas {
-    private Date rangoFechaDto;
     private String vendedorDto;
-
-    public Date getRangoFechaDto() {
-        return rangoFechaDto;
-    }
-
-    public void setRangoFechaDto(Date rangoFechaDto) {
-        this.rangoFechaDto = rangoFechaDto;
-    }
+    private String nombreSucursalDto;
+    private Date fechaVentaDto;
+    private int cantidadVendidosDto;
 
     public String getVendedorDto() {
         return vendedorDto;
@@ -20,5 +14,29 @@ public class ReqDtoVentas {
 
     public void setVendedorDto(String vendedorDto) {
         this.vendedorDto = vendedorDto;
+    }
+
+    public String getNombreSucursalDto() {
+        return nombreSucursalDto;
+    }
+
+    public void setNombreSucursalDto(String nombreSucursalDto) {
+        this.nombreSucursalDto = nombreSucursalDto;
+    }
+
+    public Date getFechaVentaDto() {
+        return fechaVentaDto;
+    }
+
+    public void setFechaVentaDto(Date fechaVentaDto) {
+        this.fechaVentaDto = fechaVentaDto;
+    }
+
+    public int getCantidadVendidosDto() {
+        return cantidadVendidosDto;
+    }
+
+    public void setCantidadVendidosDto(int cantidadVendidosDto) {
+        this.cantidadVendidosDto = cantidadVendidosDto;
     }
 }

@@ -6,9 +6,6 @@ import com.project.model.*;
 import com.project.util.Constant;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
 public class MappingObjetoVentas {
 
@@ -32,7 +29,7 @@ public class MappingObjetoVentas {
         try{
             responseDtoVentasLocal = new ResponseDtoVentas();
             responseDtoVentasLocal.setFechaDto(ventas.getFechaVenta());
-            responseDtoVentasLocal.setCantidadVendidoDto(ventas.getCantidadVentas());
+            responseDtoVentasLocal.setCantidadVendidoDto(ventas.getCantidadVendidos());
             responseDtoVentasLocal.setNombreVendedorDto(ventas.getUsuario().getNombreUsuario());
             responseDtoVentasLocal.setSucursalDto(ventas.getSucursal().getNombreSucursal());
         }catch(Exception ex){
