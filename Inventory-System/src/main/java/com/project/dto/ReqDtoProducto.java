@@ -4,7 +4,6 @@ import java.util.Date;
 
 public class ReqDtoProducto {
 
-    private Long idProductoDto;
     private String modeloDto;
     private String sistemaOperativoDto;
     private int precioCompraDto;
@@ -12,14 +11,6 @@ public class ReqDtoProducto {
     private Date fechaProductoDto;
     private int cantidadDto;
     private String marcaDto;
-
-    public Long getIdProductoDto() {
-        return idProductoDto;
-    }
-
-    public void setIdProductoDto(Long idProductoDto) {
-        this.idProductoDto = idProductoDto;
-    }
 
     public String getModeloDto() {
         return modeloDto;

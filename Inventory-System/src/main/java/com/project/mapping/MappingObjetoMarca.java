@@ -13,8 +13,7 @@ public class MappingObjetoMarca {
     public Marca transformDtoToModel(ReqDtoMarca reqDtoMarca) throws Exception {
         Marca marcaLocal;
         try{
-            marcaLocal = new Marca();
-            marcaLocal.setIdMarca(reqDtoMarca.getIdMarcaDto());
+            marcaLocal = new Marca(); 
             marcaLocal.setNombreMarca((reqDtoMarca.getNombreMarcaDto()));
 
         }catch(Exception ex){

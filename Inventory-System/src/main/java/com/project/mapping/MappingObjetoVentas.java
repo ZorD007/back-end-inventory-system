@@ -15,7 +15,7 @@ public class MappingObjetoVentas {
             ventasLocales = new Ventas();
             ventasLocales.setUsuario(usuario);
             ventasLocales.setSucursal(sucursal);
-            ventasLocales.setFechaVenta(reqDtoVentas.getRangoFechaDto());
+            ventasLocales.setFechaVenta(reqDtoVentas.getFechaVentaDto());
 
         }catch(Exception ex){
             ex.printStackTrace();

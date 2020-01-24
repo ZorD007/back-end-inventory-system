@@ -30,7 +30,6 @@ public class SucursalImp implements ISucursalService {
 
         try{
             sucursalLocal = new Sucursal();
-            sucursalLocal.setIdSucursal(reqDtoSucursal.getIdSucursalDto());
             sucursalLocal.setNombreSucursal(reqDtoSucursal.getNombreSucursalDto());
 
             responseDtoSucursal = transformarObjetos.transformarSucursalResponseDto(sucursalRepository.save(sucursalLocal));

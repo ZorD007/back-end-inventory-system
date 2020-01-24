@@ -2,7 +2,7 @@ package com.project.dto;
 
 import java.util.Date;
 
-public class ReqDtoVentas2 {
+public class ReqDtoVP {
 
     private Date fechaDto;
 

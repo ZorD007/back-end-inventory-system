@@ -57,13 +57,11 @@ public class RolImp implements IRolService {
             if(null != reqDtoRol){
 
                 rol.setCargo(reqDtoRol.getCargoDto());
-                rol.setIdRol(reqDtoRol.getIdRolDto());
 
                 Rol rolActualizado = rolRepository.save(rol);
                 responseDtoRol = mappingObjetoRol.transformModelaResponse(rolActualizado);
 
                 rol.setCargo(reqDtoRol.getCargoDto());
-                rol.setIdRol(reqDtoRol.getIdRolDto());
 
                 responseDtoRol = mappingObjetoRol.transformModelaResponse(rolRepository.saveAndFlush(rol));
 

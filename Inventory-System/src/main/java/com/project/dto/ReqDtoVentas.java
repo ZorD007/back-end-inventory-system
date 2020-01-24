@@ -7,6 +7,7 @@ public class ReqDtoVentas {
     private String nombreSucursalDto;
     private Date fechaVentaDto;
     private int cantidadVendidosDto;
+    private String modeloDto;
 
     public String getVendedorDto() {
         return vendedorDto;
@@ -38,5 +39,13 @@ public class ReqDtoVentas {
 
     public void setCantidadVendidosDto(int cantidadVendidosDto) {
         this.cantidadVendidosDto = cantidadVendidosDto;
+    }
+
+    public String getModeloDto() {
+        return modeloDto;
+    }
+
+    public void setModeloDto(String modeloDto) {
+        this.modeloDto = modeloDto;
     }
 }

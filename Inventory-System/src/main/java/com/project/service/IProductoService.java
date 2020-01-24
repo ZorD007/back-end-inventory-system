@@ -12,4 +12,5 @@ public interface IProductoService {
     ResponseDtoProducto modificarProducto(Long id, ReqDtoProducto reqDtoProducto) throws Exception;
     boolean eliminarProducto(Long id) throws Exception;
     List<ResponseDtoProducto> listarProducto() throws Exception;
+    ResponseDtoProducto restarStock() throws Exception;
 }

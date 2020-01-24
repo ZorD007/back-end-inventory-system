@@ -14,7 +14,6 @@ public class MappingObjetoRol {
         Rol rolLocal;
         try{
             rolLocal = new Rol();
-            rolLocal.setIdRol(reqDtoRol.getIdRolDto());
             rolLocal.setCargo(reqDtoRol.getCargoDto());
         }catch(Exception ex){
             ex.printStackTrace();

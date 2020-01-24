@@ -15,9 +15,6 @@ public class Ventas {
     @Column(name = "id_ventas")
     private Long idVentas;
 
-    @Column(name = "numero_operacion", nullable = false)
-    private long nuOperacion;
-
     @Column(name = "fecha", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date fechaVenta;
@@ -42,14 +39,6 @@ public class Ventas {
 
     public void setIdVentas(Long idVentas) {
         this.idVentas = idVentas;
-    }
-
-    public long getNuOperacion() {
-        return nuOperacion;
-    }
-
-    public void setNuOperacion(long nuOperacion) {
-        this.nuOperacion = nuOperacion;
     }
 
     public Date getFechaVenta() {

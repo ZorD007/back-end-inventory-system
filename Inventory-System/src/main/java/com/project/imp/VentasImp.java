@@ -1,18 +1,14 @@
 package com.project.imp;
 
 import com.project.dto.ReqDtoVentas;
-import com.project.dto.ReqDtoVentas2;
+import com.project.dto.ReqDtoVP;
 import com.project.dto.ResponseDtoVentas;
+import com.project.dto.ResponseDtoVentasProducto;
 import com.project.exception.NoEncontradoException;
 import com.project.mapping.MappingObjetoVentas;
-import com.project.model.Sucursal;
-import com.project.model.Usuario;
-import com.project.model.Ventas;
-import com.project.model.VentasProducto;
-import com.project.repository.SucursalRepository;
-import com.project.repository.UsuarioRepository;
-import com.project.repository.VentasProductoRepository;
-import com.project.repository.VentasRepository;
+import com.project.mapping.MappingObjetoVentasProducto;
+import com.project.model.*;
+import com.project.repository.*;
 import com.project.service.IVentasService;
 import com.project.util.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +31,9 @@ public class VentasImp implements IVentasService {
     private UsuarioRepository usuarioRepository;
 
     @Autowired
+    private ProductoRepository productoRepository;
+
+    @Autowired
     private SucursalRepository sucursalRepository;
 
     @Autowired
@@ -42,6 +41,9 @@ public class VentasImp implements IVentasService {
 
     @Autowired
     private MappingObjetoVentas mappingObjetoVentas;
+
+    @Autowired
+    private MappingObjetoVentasProducto ma;
 
     @Override
     public List<Ventas> reporteDeGanancias(Date fechaInicio, Date fechaFin) throws Exception {
@@ -60,43 +62,44 @@ public class VentasImp implements IVentasService {
     }
 
     @Override
-    public Ventas venderProductos(ReqDtoVentas reqDtoVentas) throws Exception {
+    public ResponseDtoVentasProducto venderProductos(ReqDtoVentas reqDtoVentas) throws Exception {
+        ResponseDtoVentasProducto dtoVentasProducto = null;
         Ventas ventasLocal = null;
         VentasProducto ventasProductoLocal = null;
 
         try{
             Usuario validarUsuario = usuarioRepository.findByUserName(reqDtoVentas.getVendedorDto());
-            Sucursal sucursal = sucursalRepository.findByNombre(reqDtoVentas.getNombreSucursalDto());
+            Sucursal sucursal = sucursalRepository.findByNombreSucursal(reqDtoVentas.getNombreSucursalDto());
+            Producto producto = productoRepository.findByModelo(reqDtoVentas.getModeloDto());
             if(validarUsuario != null && sucursal != null){
                 ventasLocal = new Ventas();
                 ventasLocal.setUsuario(validarUsuario);
                 ventasLocal.setSucursal(sucursal);
                 ventasLocal.setFechaVenta(reqDtoVentas.getFechaVentaDto());
-                ventasLocal.setNuOperacion(ventasLocal.getIdVentas());
                 ventasLocal.setCantidadVendidos(reqDtoVentas.getCantidadVendidosDto());
 
 
+                ventasProductoLocal = ventasProductoRepository.save(ma.transformarAVentasProducto(ventasLocal, producto));
 
-
-
+                dtoVentasProducto = ma.transformModelToResponse(ventasProductoLocal);
 
             }
         }catch(Exception ex){
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);
         }
-        return ventasLocal;
+        return dtoVentasProducto;
     }
 
 
     @Override
-    public List<ResponseDtoVentas> mostrarVenta(ReqDtoVentas2 reqDtoVentas2) throws Exception {
+    public List<ResponseDtoVentas> mostrarVenta(ReqDtoVP reqDtoVP) throws Exception {
         List<ResponseDtoVentas> DtoVentasLista = new ArrayList<>();
         Ventas ventasLocal;
         try {
-            Ventas validarVenta = ventasRepository.findByFechaVenta(reqDtoVentas2.getFechaDto());
+            Ventas validarVenta = ventasRepository.findByFechaVenta(reqDtoVP.getFechaDto());
             if (validarVenta != null){
-                VentasProducto buscarProducto = ventasProductoRepository.findProducto()
+                //VentasProducto buscarProducto = ventasProductoRepository.findProducto();
                 ventasLocal = validarVenta;
                 DtoVentasLista.add(mappingObjetoVentas.transformModeltoResponse(ventasLocal));
             }
