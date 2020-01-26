@@ -22,12 +22,6 @@ import java.util.List;
 public class VentasImp implements IVentasService {
 
     @Autowired
-    private ProductoImp productoImp;
-
-    @Autowired
-    private VentasRepository ventasRepository;
-
-    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -40,26 +34,7 @@ public class VentasImp implements IVentasService {
     private VentasProductoRepository ventasProductoRepository;
 
     @Autowired
-    private MappingObjetoVentas mappingObjetoVentas;
-
-    @Autowired
     private MappingObjetoVentasProducto ma;
-
-    @Override
-    public List<Ventas> reporteDeGanancias(Date fechaInicio, Date fechaFin) throws Exception {
-        List<Ventas> listaVentas = new ArrayList<Ventas>();
-        try{
-            List<Ventas> encontrarVentas = ventasRepository.findVentasByDate(fechaInicio, fechaFin);
-            if (encontrarVentas != null){
-                listaVentas.addAll(encontrarVentas);
-            }
-
-        }catch (Exception ex){
-            ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
-        }
-        return listaVentas;
-    }
 
     @Override
     public ResponseDtoVentasProducto venderProductos(ReqDtoVentas reqDtoVentas) throws Exception {
@@ -71,7 +46,7 @@ public class VentasImp implements IVentasService {
             Usuario validarUsuario = usuarioRepository.findByUserName(reqDtoVentas.getVendedorDto());
             Sucursal sucursal = sucursalRepository.findByNombreSucursal(reqDtoVentas.getNombreSucursalDto());
             Producto producto = productoRepository.findByModelo(reqDtoVentas.getModeloDto());
-            if(validarUsuario != null && sucursal != null){
+            if(validarUsuario != null && sucursal != null && producto != null){
                 ventasLocal = new Ventas();
                 ventasLocal.setUsuario(validarUsuario);
                 ventasLocal.setSucursal(sucursal);
@@ -91,25 +66,18 @@ public class VentasImp implements IVentasService {
         return dtoVentasProducto;
     }
 
-
     @Override
-    public List<ResponseDtoVentas> mostrarVenta(ReqDtoVP reqDtoVP) throws Exception {
-        List<ResponseDtoVentas> DtoVentasLista = new ArrayList<>();
-        Ventas ventasLocal;
+    public List<ResponseDtoVentasProducto> listarVentas() throws Exception {
+        List<ResponseDtoVentasProducto> listVentas = new ArrayList<>();
         try {
-            Ventas validarVenta = ventasRepository.findByFechaVenta(reqDtoVP.getFechaDto());
-            if (validarVenta != null){
-                //VentasProducto buscarProducto = ventasProductoRepository.findProducto();
-                ventasLocal = validarVenta;
-                DtoVentasLista.add(mappingObjetoVentas.transformModeltoResponse(ventasLocal));
+            List<VentasProducto> ventasProductos = ventasProductoRepository.findAll();
+            for (VentasProducto vp : ventasProductos){
+                listVentas.add(ma.transformModelToResponse(vp));
             }
-        }catch (NoEncontradoException ex){
-            ex.printStackTrace();
-            throw new NoEncontradoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
             throw new Exception(ex.getMessage());
         }
-        return DtoVentasLista;
+        return listVentas;
     }
 }

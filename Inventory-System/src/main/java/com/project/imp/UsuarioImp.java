@@ -165,21 +165,4 @@ public class UsuarioImp implements IUsuariosService {
         return listUsuario;
     }
 
-    @Override
-    public boolean validarRol(String cargo) throws Exception {
-        try {
-            Rol validarRol = rolRepository.findByCargo(cargo);
-            if (validarRol != null){
-                return true;
-            }else{
-                throw new NoValidarSesionException(Constant.ERROR_VALIDAR);
-        }
-        }catch (NoValidarSesionException ex){
-            ex.printStackTrace();
-            throw new NoValidarSesionException(ex.getMessage());
-        }catch (Exception ex){
-            ex.printStackTrace();
-            throw new Exception(ex.getMessage());
-        }
-    }
 }

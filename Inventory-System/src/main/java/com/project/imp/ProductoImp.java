@@ -134,4 +134,9 @@ public class ProductoImp implements IProductoService {
         return listProducto;
     }
 
+    @Override
+    public ResponseDtoProducto restarStock() throws Exception {
+        return null;
+    }
+
 }

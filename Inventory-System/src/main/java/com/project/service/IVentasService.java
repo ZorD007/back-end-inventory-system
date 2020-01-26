@@ -10,7 +10,6 @@ import java.util.Date;
 import java.util.List;
 
 public interface IVentasService {
-    List<Ventas> reporteDeGanancias(Date fechaInicio, Date fechaFin) throws Exception;
     ResponseDtoVentasProducto venderProductos(ReqDtoVentas reqDtoVentas) throws Exception;
-    List<ResponseDtoVentas> mostrarVenta(ReqDtoVP reqDtoVP) throws Exception;
+    List<ResponseDtoVentasProducto> listarVentas() throws Exception;
 }

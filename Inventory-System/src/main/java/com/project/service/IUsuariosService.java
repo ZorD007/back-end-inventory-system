@@ -15,5 +15,4 @@ public interface IUsuariosService {
     ResponseDtoUsuario modificarUsuario(Long id, ReqDtoUsuario reqDtoUsuario) throws Exception;
     boolean eliminarUsuario(Long id) throws Exception;
     List<ResponseDtoUsuario> listarUsuario() throws Exception;
-    boolean validarRol(String cargo) throws Exception;
 }

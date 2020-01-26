@@ -63,4 +63,50 @@ public class UsuariosController {
         }
         return rs;
     }
+
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
+    public ResponseEntity<Object> listarUsuario(){
+        ResponseEntity<Object> rs = null;
+        try {
+            rs = new ResponseEntity<Object>(usuarioImp.listarUsuario(), HttpStatus.OK);
+        }catch (NoValidarSesionException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_NO_ENCONTRADO, HttpStatus.UNAUTHORIZED);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> modificarUsuario(@PathVariable Long id, @RequestBody ReqDtoUsuario reqDtoUsuario){
+        ResponseEntity<Object> rs = null;
+        try {
+            rs = new ResponseEntity<Object>(usuarioImp.modificarUsuario(id, reqDtoUsuario), HttpStatus.OK);
+        }catch (NoValidarSesionException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_ACTUALIZAR, HttpStatus.UNAUTHORIZED);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Object> eliminarUsuario(@PathVariable Long id){
+        ResponseEntity<Object> rs = null;
+        try {
+            rs = new ResponseEntity<Object>(usuarioImp.eliminarUsuario(id), HttpStatus.OK);
+        }catch (NoValidarSesionException ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_ELIMINAR, HttpStatus.UNAUTHORIZED);
+        }catch (Exception ex){
+            ex.printStackTrace();
+            rs = new ResponseEntity<Object>(Constant.ERROR_SISTEMA, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return rs;
+    }
+
 }
