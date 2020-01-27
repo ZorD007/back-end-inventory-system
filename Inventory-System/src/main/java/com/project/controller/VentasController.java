@@ -35,7 +35,7 @@ public class VentasController {
         return rs;
     }
 
-    @RequestMapping(value = "/listar", method = RequestMethod.POST)
+    @RequestMapping(value = "/listar", method = RequestMethod.GET)
     public ResponseEntity<Object> listarVentas(){
         ResponseEntity<Object> rs = null;
         try {
