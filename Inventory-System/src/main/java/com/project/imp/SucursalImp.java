@@ -20,20 +20,24 @@ public class SucursalImp implements ISucursalService {
 
     @Autowired
     private SucursalRepository sucursalRepository;
+
     @Autowired
     private MappingObjetoSucursal transformarObjetos;
 
+    /**
+     * Crear y guardar un objeto sucursal en la base de datos
+     * @param reqDtoSucursal
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResponseDtoSucursal agregarSucursal(ReqDtoSucursal reqDtoSucursal) throws Exception{
         ResponseDtoSucursal responseDtoSucursal;
         Sucursal sucursalLocal;
-
         try{
             sucursalLocal = new Sucursal();
             sucursalLocal.setNombreSucursal(reqDtoSucursal.getNombreSucursalDto());
-
             responseDtoSucursal = transformarObjetos.transformarSucursalResponseDto(sucursalRepository.save(sucursalLocal));
-
         }catch(Exception ex){
             ex.printStackTrace();
             throw new Exception(Constant.ERROR_SISTEMA);
@@ -41,10 +45,15 @@ public class SucursalImp implements ISucursalService {
         return responseDtoSucursal;
     }
 
+    /**
+     * Metodo el cual elimina un objeto buscado por id
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean eliminarSucursal(Long id) throws Exception {
         try{
-
             Sucursal sucursal = transformarObjetos.transformarOptionalSucursal(sucursalRepository.findById(id));
             if(null == sucursal){
                 throw new NoEncontradoException(Constant.ERROR_NO_ENCONTRADO);
@@ -61,9 +70,14 @@ public class SucursalImp implements ISucursalService {
         }
     }
 
+    /**
+     * Metodo para buscar un objeto por una id en la base de datos
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public Sucursal buscarPorId(Long id) throws Exception {
-
         Sucursal sucursallocal;
         try{
             sucursallocal = transformarObjetos.transformarOptionalSucursal(sucursalRepository.findById(id));
@@ -80,6 +94,11 @@ public class SucursalImp implements ISucursalService {
         return sucursallocal;
     }
 
+    /**
+     * Metodo el cual lista los objetos que hay en la base de datos
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<ResponseDtoSucursal> listarSucursal() throws Exception {
         List<ResponseDtoSucursal> listSucursal = new ArrayList<>();
@@ -95,6 +114,13 @@ public class SucursalImp implements ISucursalService {
         return listSucursal;
     }
 
+    /**
+     * Metodo el cual modifica un objeto en especifico buscado por id
+     * @param id
+     * @param reqDtoSucursal
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResponseDtoSucursal modificarSucursal(Long id, ReqDtoSucursal reqDtoSucursal) throws Exception {
         ResponseDtoSucursal responseDtoSucursal = null;

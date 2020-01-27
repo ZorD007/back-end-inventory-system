@@ -25,6 +25,12 @@ public class MarcaImp implements IMarcaService {
     @Autowired
     private MappingObjetoMarca mappingObjetoMarca;
 
+    /**
+     * Agregar y guardar un objeto marca en la base de datos
+     * @param reqDtoMarca
+     * @return responseDtoMarca
+     * @throws Exception
+     */
     @Override
     public ResponseDtoMarca agregarMarca(ReqDtoMarca reqDtoMarca) throws Exception{
         ResponseDtoMarca responseDtoMarca;
@@ -43,11 +49,17 @@ public class MarcaImp implements IMarcaService {
             throw new NoGuardadoException(ex.getMessage());
         }catch(Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
         return responseDtoMarca;
     }
 
+    /**
+     * Elimina al objeto el cual se busca por una id
+     * @param id
+     * @return true
+     * @throws Exception
+     */
     @Override
     public boolean eliminarMarca(Long id) throws Exception {
         try {
@@ -63,10 +75,16 @@ public class MarcaImp implements IMarcaService {
             throw new NoEncontradoException(ex.getMessage());
         }catch(Exception ex) {
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
     }
 
+    /**
+     * Buscar objeto en especifico dado por una id
+     * @param id
+     * @return marcaLocal
+     * @throws Exception
+     */
     @Override
     public Marca buscarPorId(Long id) throws Exception {
         Marca marcaLocal;
@@ -80,11 +98,16 @@ public class MarcaImp implements IMarcaService {
             throw new NoEncontradoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
         return marcaLocal;
     }
 
+    /**
+     * Metodo que trae una lista de todos los objetos en la base de datos
+     * @return listMarca
+     * @throws Exception
+     */
     @Override
     public List<ResponseDtoMarca> listarMarca() throws Exception {
         List<ResponseDtoMarca> listMarca = new ArrayList<>();
@@ -96,11 +119,18 @@ public class MarcaImp implements IMarcaService {
 
         }catch (Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
         return listMarca;
     }
 
+    /**
+     * Metodo en el cual modificaremos datos en un objeto en especifico de la base de datos
+     * @param id
+     * @param reqDtoMarca
+     * @return responseDtoMarca
+     * @throws Exception
+     */
     @Override
     public ResponseDtoMarca modificarMarca(Long id, ReqDtoMarca reqDtoMarca) throws Exception {
         ResponseDtoMarca responseDtoMarca = null;

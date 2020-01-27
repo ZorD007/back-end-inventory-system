@@ -61,7 +61,7 @@ public class VentasImp implements IVentasService {
             }
         }catch(Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
         return dtoVentasProducto;
     }

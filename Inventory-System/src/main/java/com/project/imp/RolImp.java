@@ -25,6 +25,12 @@ public class RolImp implements IRolService {
     @Autowired
     private MappingObjetoRol mappingObjetoRol;
 
+    /**
+     * Crea y guarda un objeto rol en la base de datos
+     * @param reqDtoRol
+     * @return responseDtoRol
+     * @throws Exception
+     */
     @Override
     public ResponseDtoRol añadirRol(ReqDtoRol reqDtoRol) throws Exception {
        ResponseDtoRol responseDtoRol;
@@ -48,33 +54,39 @@ public class RolImp implements IRolService {
         return responseDtoRol;
     }
 
+    /**
+     * Metodo el cual se modificara un objeto en la base de datos buscado por una id
+     * @param id
+     * @param reqDtoRol
+     * @return responseDtoRol
+     * @throws Exception
+     */
     @Override
     public ResponseDtoRol modificarRol(Long id, ReqDtoRol reqDtoRol) throws Exception {
         ResponseDtoRol responseDtoRol= null;
         try{
-
             Rol rol = rolRepository.findById(id).get();
             if(null != reqDtoRol){
-
                 rol.setCargo(reqDtoRol.getCargoDto());
-
                 Rol rolActualizado = rolRepository.save(rol);
                 responseDtoRol = mappingObjetoRol.transformModelaResponse(rolActualizado);
-
                 rol.setCargo(reqDtoRol.getCargoDto());
-
                 responseDtoRol = mappingObjetoRol.transformModelaResponse(rolRepository.saveAndFlush(rol));
-
             }else{
                 throw new NoActualizarException(Constant.ERROR_ACTUALIZAR);
             }
         }catch(Exception ex){
-
             ex.printStackTrace();
         }
         return responseDtoRol;
     }
 
+    /**
+     * Metodo el cual busca un objeto en especifico por una id
+     * @param id
+     * @return rollocal
+     * @throws Exception
+     */
     @Override
     public Rol buscarPorId(Long id) throws Exception {
         Rol rolLocal;
@@ -92,6 +104,12 @@ public class RolImp implements IRolService {
         return rolLocal;
     }
 
+    /**
+     * Metodo el cual elimina un objeto buscado por una id
+     * @param id
+     * @return true
+     * @throws Exception
+     */
     @Override
     public boolean eliminarRol(Long id) throws Exception {
         try{
@@ -107,10 +125,15 @@ public class RolImp implements IRolService {
             throw new NoEncontradoException(ex.getMessage());
         }catch (Exception ex){
             ex.printStackTrace();
-            throw new Exception(Constant.ERROR_SISTEMA);
+            throw new Exception(ex.getMessage());
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<ResponseDtoRol> listarRol() throws Exception {
 

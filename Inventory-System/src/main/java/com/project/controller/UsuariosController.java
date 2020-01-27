@@ -94,7 +94,7 @@ public class UsuariosController {
         return rs;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Object> eliminarUsuario(@PathVariable Long id){
         ResponseEntity<Object> rs = null;
         try {
@@ -108,5 +108,4 @@ public class UsuariosController {
         }
         return rs;
     }
-
 }

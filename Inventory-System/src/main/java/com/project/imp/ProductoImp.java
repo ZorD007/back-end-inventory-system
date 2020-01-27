@@ -29,6 +29,12 @@ public class ProductoImp implements IProductoService {
     @Autowired
     private MappingObjetoProducto transformarObjetos;
 
+    /**
+     * Crear y guardar un objeto producto en la base de datos
+     * @param reqDtoProducto
+     * @return responseDtoProducto
+     * @throws Exception
+     */
     @Override
     public ResponseDtoProducto agregarProducto(ReqDtoProducto reqDtoProducto) throws Exception{
         ResponseDtoProducto responseDtoProducto = null;
@@ -54,6 +60,13 @@ public class ProductoImp implements IProductoService {
         return responseDtoProducto;
     }
 
+    /**
+     * Metodo en el cual se modifica un objeto buscado por id
+     * @param id
+     * @param reqDtoProducto
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResponseDtoProducto modificarProducto(Long id, ReqDtoProducto reqDtoProducto) throws Exception {
         ResponseDtoProducto responseDtoProducto= null;
@@ -78,6 +91,12 @@ public class ProductoImp implements IProductoService {
         return responseDtoProducto;
     }
 
+    /**
+     * Metodo en el cual se busca un objeto por id
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public ResponseDtoProducto buscarPorId(Long id) throws Exception {
         ResponseDtoProducto dtoProducto;
@@ -98,6 +117,12 @@ public class ProductoImp implements IProductoService {
         }
     }
 
+    /**
+     * Metodo en el que se elimina un objeto de la base de datos por una id
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public boolean eliminarProducto(Long id) throws Exception {
         try{
@@ -117,9 +142,13 @@ public class ProductoImp implements IProductoService {
         }
     }
 
+    /**
+     * Metodo el cual trae los objetos de la base de datos
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<ResponseDtoProducto> listarProducto() throws Exception {
-
         List<ResponseDtoProducto> listProducto = new ArrayList<>();
         try {
             List<Producto> productos = productoRepository.findAll();
@@ -133,10 +162,4 @@ public class ProductoImp implements IProductoService {
         }
         return listProducto;
     }
-
-    @Override
-    public ResponseDtoProducto restarStock() throws Exception {
-        return null;
-    }
-
 }
